@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/">
+    <base href="/cci/">
     <meta id="meta-description" name="description" content="">
     <title id="page-title">Article - CCI Rumonge</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -101,9 +101,9 @@
                     <!-- Breadcrumb -->
                     <nav class="mb-8">
                         <ol class="flex items-center space-x-2 text-sm">
-                            <li><a href="/" class="text-blue-600 hover:text-blue-700 font-medium">Accueil</a></li>
+                            <li><a href="./" class="text-blue-600 hover:text-blue-700 font-medium">Accueil</a></li>
                             <li class="text-slate-400">/</li>
-                            <li><a href="/news.html" class="text-blue-600 hover:text-blue-700 font-medium">News</a></li>
+                            <li><a href="news" class="text-blue-600 hover:text-blue-700 font-medium">News</a></li>
                             <li class="text-slate-400">/</li>
                             <li id="breadcrumb-title" class="text-slate-600">...</li>
                         </ol>
@@ -204,11 +204,11 @@
                             Aidez-nous à transformer plus de vies par l'éducation
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="/volontaires.html"
+                            <a href="volontaires"
                                 class="px-8 py-4 bg-white text-blue-900 font-black rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
                                 Devenir Volontaire
                             </a>
-                            <a href="/contact.html"
+                            <a href="contact"
                                 class="px-8 py-4 bg-transparent border-2 border-white text-white font-black rounded-2xl hover:bg-white hover:text-blue-900 transition-all uppercase tracking-widest text-sm">
                                 Faire un Don
                             </a>
@@ -223,7 +223,7 @@
     <div id="footer"></div>
 
     <script type="module">
-        import { getPostById, getRelatedPosts } from './data/posts-data.js';
+        import { getPostById, getRelatedPosts } from '../data/posts-data.js';
 
         // Get post ID from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -247,13 +247,13 @@
         // Load post content
         const loadPostContent = () => {
             if (!postId) {
-                window.location.href = '/news.html';
+                window.location.href = 'news';
                 return;
             }
 
             const post = getPostById(postId);
             if (!post) {
-                window.location.href = '/news.html';
+                window.location.href = 'news';
                 return;
             }
 
