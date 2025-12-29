@@ -223,7 +223,7 @@
     <div id="footer"></div>
 
     <script type="module">
-        import { getPostById, getRelatedPosts } from '../data/posts-data.js';
+        import { getPostById, getRelatedPosts } from './data/posts-data.js';
 
         // Get post ID from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -247,13 +247,13 @@
         // Load post content
         const loadPostContent = () => {
             if (!postId) {
-                window.location.href = 'news';
+                window.location.href = 'news/';
                 return;
             }
 
             const post = getPostById(postId);
             if (!post) {
-                window.location.href = 'news';
+                window.location.href = 'news/';
                 return;
             }
 
@@ -299,7 +299,7 @@
             const relatedPosts = getRelatedPosts(postId, 4);
 
             relatedContainer.innerHTML = relatedPosts.map(post => `
-                <a href="post-detail?id=${post.id}" class="block group">
+                <a href="post-detail/?id=${post.id}" class="block group">
                 <div class="relative h-32 rounded-2xl overflow-hidden mb-3">
                     <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
