@@ -307,7 +307,7 @@
     <div id="footer"></div>
 
     <script type="module">
-        // Load components
+        // Load components and execute any scripts inside the fetched HTML
         const loadComponent = async (selector, filePath) => {
             try {
                 const response = await fetch(filePath);
@@ -316,6 +316,21 @@
                 const container = document.querySelector(selector);
                 if (container) {
                     container.innerHTML = html;
+
+                    // Execute scripts from the injected HTML (both external and inline)
+                    const scripts = Array.from(container.querySelectorAll('script'));
+                    for (const oldScript of scripts) {
+                        const newScript = document.createElement('script');
+                        if (oldScript.src) {
+                            newScript.src = oldScript.src;
+                            if (oldScript.type) newScript.type = oldScript.type;
+                            document.head.appendChild(newScript);
+                        } else {
+                            newScript.textContent = oldScript.textContent;
+                            document.head.appendChild(newScript);
+                        }
+                        oldScript.remove();
+                    }
                 }
             } catch (err) {
                 console.error("Error loading component:", err.message);

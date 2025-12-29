@@ -111,6 +111,25 @@ const initMobileMenu = () => {
   if (!menuBtn || !mobileMenu || !overlay || !closeBtn) return;
 
   const openMenu = () => {
+    // Force overlay/menu to be fixed and on top of all stacking contexts
+    try {
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.zIndex = '2147483647';
+      overlay.style.pointerEvents = 'auto';
+
+      mobileMenu.style.position = 'fixed';
+      mobileMenu.style.top = '0';
+      mobileMenu.style.right = '0';
+      mobileMenu.style.height = '100%';
+      mobileMenu.style.zIndex = '2147483647';
+    } catch (e) {
+      console.error('Error applying mobile overlay styles', e);
+    }
+
     // Remove hidden first to allow transitions
     overlay.classList.remove("hidden");
     mobileMenu.classList.remove("hidden");
@@ -147,6 +166,17 @@ const initMobileMenu = () => {
     document.body.style.overflow = "";
     document.body.style.position = "";
     document.body.style.width = "";
+    // Optionally reset inline styles so they don't persist if other logic changes
+    try {
+      overlay.style.pointerEvents = '';
+      // keep position fixed during close to allow transition out; remove zIndex after hidden
+      setTimeout(() => {
+        overlay.style.zIndex = '';
+        mobileMenu.style.zIndex = '';
+      }, 600);
+    } catch (e) {
+      // swallow
+    }
   };
 
   menuBtn.addEventListener("click", openMenu);
