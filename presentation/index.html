@@ -211,6 +211,9 @@
                         // remove original to avoid duplicate execution
                         oldScript.remove();
                     }
+
+                    // Ensure header behaviors initialize if available
+                    try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
                 }
             } catch (err) {
                 console.error("Error loading component:", err.message);

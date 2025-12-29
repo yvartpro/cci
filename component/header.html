@@ -162,32 +162,146 @@
 </header>
 
 <script>
-  // Ensure mobile overlay and menu are moved to <body> and forced on top of all stacking contexts.
-  (function moveMobileToBody(){
+  // Single initializer: moves mobile elements to body, forces styles, and initializes Activities mega-menu
+  window.__cci_initHeader = function() {
     try {
       const overlay = document.getElementById('mobile-menu-overlay');
       const mobileMenu = document.getElementById('mobile-menu');
-      if (!overlay || !mobileMenu) return;
+      if (overlay && mobileMenu) {
+        if (overlay.parentElement !== document.body) document.body.appendChild(overlay);
+        if (mobileMenu.parentElement !== document.body) document.body.appendChild(mobileMenu);
 
-      if (overlay.parentElement !== document.body) document.body.appendChild(overlay);
-      if (mobileMenu.parentElement !== document.body) document.body.appendChild(mobileMenu);
+        overlay.style.setProperty('position', 'fixed', 'important');
+        overlay.style.setProperty('top', '0', 'important');
+        overlay.style.setProperty('left', '0', 'important');
+        overlay.style.setProperty('width', '100%', 'important');
+        overlay.style.setProperty('height', '100%', 'important');
+        overlay.style.setProperty('z-index', '2147483647', 'important');
+        overlay.style.setProperty('pointer-events', 'auto', 'important');
 
-      // Apply explicit styles to avoid being clipped by transformed ancestors
-      overlay.style.position = 'fixed';
-      overlay.style.top = '0';
-      overlay.style.left = '0';
-      overlay.style.width = '100%';
-      overlay.style.height = '100%';
-      overlay.style.zIndex = '2147483647';
-      overlay.style.pointerEvents = 'auto';
-
-      mobileMenu.style.position = 'fixed';
-      mobileMenu.style.top = '0';
-      mobileMenu.style.right = '0';
-      mobileMenu.style.height = '100%';
-      mobileMenu.style.zIndex = '2147483647';
+        mobileMenu.style.setProperty('position', 'fixed', 'important');
+        mobileMenu.style.setProperty('top', '0', 'important');
+        mobileMenu.style.setProperty('right', '0', 'important');
+        mobileMenu.style.setProperty('height', '100%', 'important');
+        mobileMenu.style.setProperty('z-index', '2147483647', 'important');
+      }
     } catch (e) {
       console.error('moveMobileToBody error', e);
     }
+
+    try {
+      const groups = document.querySelectorAll('.group\\/activity');
+      groups.forEach(group => {
+        if (group._cciInit) return; // idempotent
+        group._cciInit = true;
+
+        const btn = group.querySelector('button');
+        const menu = group.querySelector('div.absolute');
+        if (!btn || !menu) return;
+
+        if (menu.parentElement !== document.body) {
+          menu._origParent = group;
+          document.body.appendChild(menu);
+        }
+
+        Object.assign(menu.style, {
+          position: 'fixed',
+          left: '0px',
+          top: '0px',
+          transform: 'translateX(-50%)',
+          visibility: 'hidden',
+          opacity: '0',
+          transition: 'opacity 200ms ease'
+        });
+        menu.style.setProperty('z-index', '2147483646', 'important');
+
+        const positionMenu = () => {
+          const rect = btn.getBoundingClientRect();
+          const left = rect.left + rect.width / 2;
+          const top = rect.bottom + 8;
+          menu.style.left = left + 'px';
+          menu.style.top = top + 'px';
+          menu.style.transform = 'translateX(-50%)';
+        };
+
+        const show = () => {
+          positionMenu();
+          menu.style.visibility = 'visible';
+          menu.style.opacity = '1';
+        };
+        const hide = () => {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+        };
+
+        btn.addEventListener('mouseenter', show);
+        btn.addEventListener('focus', show);
+        group.addEventListener('mouseleave', hide);
+
+        document.addEventListener('click', (e) => {
+          if (!group.contains(e.target) && !menu.contains(e.target)) hide();
+        });
+
+        window.addEventListener('resize', () => {
+          if (menu.style.visibility === 'visible') positionMenu();
+        });
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (menu.style.visibility === 'visible') hide(); else show();
+        });
+      });
+    } catch (err) {
+      console.error('initActivitiesMegaMenu error', err);
+    }
+  };
+
+  // Auto-run when header is included inline
+  try { window.__cci_initHeader(); } catch (e) {}
+
+  // Diagnostic helper — run only when ?cci_debug=1 is present in the URL
+  (function cciDebug(){
+    if (!location.search.includes('cci_debug=1')) return;
+    try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
+
+    const fmt = (el) => {
+      if (!el) return null;
+      const s = getComputedStyle(el);
+      return {
+        node: el.tagName + (el.id?('#'+el.id):'') + (el.className?(' .' + el.className.split(' ').join('.')):''),
+        parent: el.parentElement ? (el.parentElement.tagName + (el.parentElement.id?('#'+el.parentElement.id):'')) : null,
+        position: s.position,
+        zIndex: s.zIndex,
+        transform: s.transform,
+        offsetWidth: el.offsetWidth,
+        offsetHeight: el.offsetHeight
+      };
+    };
+
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenu = document.getElementById('mobile-menu');
+    console.log('CCI DEBUG: overlay', fmt(overlay));
+    console.log('CCI DEBUG: mobileMenu', fmt(mobileMenu));
+
+    const candidates = Array.from(document.body.querySelectorAll('.rounded-3xl, [class*="rounded-3xl"]')).filter(e => e.offsetWidth > 200);
+    console.log('CCI DEBUG: potential mega-menu candidates (body .rounded-3xl with width>200):', candidates.map(fmt));
+
+    const hero = document.querySelector('section.relative');
+    console.log('CCI DEBUG: hero', fmt(hero));
+
+    if (hero) {
+      const chain = [];
+      for (let node = hero; node; node = node.parentElement) {
+        const s = getComputedStyle(node);
+        chain.push({ node: node.tagName + (node.id?('#'+node.id):''), position: s.position, zIndex: s.zIndex, transform: s.transform });
+        if (node === document.body) break;
+      }
+      console.log('CCI DEBUG: hero ancestor chain', chain);
+    }
+
+    const centerEl = document.elementFromPoint(window.innerWidth/2, window.innerHeight/4);
+    const midEl = document.elementFromPoint(window.innerWidth/2, window.innerHeight/2);
+    console.log('CCI DEBUG: element at top-center (1/4):', fmt(centerEl));
+    console.log('CCI DEBUG: element at center:', fmt(midEl));
   })();
 </script>

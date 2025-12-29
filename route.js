@@ -10,7 +10,29 @@ const loadComponent = async (selector, filePath) => {
     const html = await response.text();
     const container = document.querySelector(selector);
     if (container) {
-      container.innerHTML = html;
+        container.innerHTML = html;
+
+        // Execute scripts from the injected HTML (both external and inline)
+        try {
+          const scripts = Array.from(container.querySelectorAll('script'));
+          for (const oldScript of scripts) {
+            const newScript = document.createElement('script');
+            if (oldScript.src) {
+              newScript.src = oldScript.src;
+              if (oldScript.type) newScript.type = oldScript.type;
+              document.head.appendChild(newScript);
+            } else {
+              newScript.textContent = oldScript.textContent;
+              document.head.appendChild(newScript);
+            }
+            oldScript.remove();
+          }
+        } catch (e) {
+          // ignore
+        }
+
+        // If header initializer is available, call it
+        try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
     }
   } catch (err) {
     console.error("Error loading component:", err.message);
@@ -113,19 +135,20 @@ const initMobileMenu = () => {
   const openMenu = () => {
     // Force overlay/menu to be fixed and on top of all stacking contexts
     try {
-      overlay.style.position = 'fixed';
-      overlay.style.top = '0';
-      overlay.style.left = '0';
-      overlay.style.width = '100%';
-      overlay.style.height = '100%';
-      overlay.style.zIndex = '2147483647';
-      overlay.style.pointerEvents = 'auto';
+      // set styles with important priority to overcome any page stacking contexts
+      overlay.style.setProperty('position', 'fixed', 'important');
+      overlay.style.setProperty('top', '0', 'important');
+      overlay.style.setProperty('left', '0', 'important');
+      overlay.style.setProperty('width', '100%', 'important');
+      overlay.style.setProperty('height', '100%', 'important');
+      overlay.style.setProperty('z-index', '2147483647', 'important');
+      overlay.style.setProperty('pointer-events', 'auto', 'important');
 
-      mobileMenu.style.position = 'fixed';
-      mobileMenu.style.top = '0';
-      mobileMenu.style.right = '0';
-      mobileMenu.style.height = '100%';
-      mobileMenu.style.zIndex = '2147483647';
+      mobileMenu.style.setProperty('position', 'fixed', 'important');
+      mobileMenu.style.setProperty('top', '0', 'important');
+      mobileMenu.style.setProperty('right', '0', 'important');
+      mobileMenu.style.setProperty('height', '100%', 'important');
+      mobileMenu.style.setProperty('z-index', '2147483647', 'important');
     } catch (e) {
       console.error('Error applying mobile overlay styles', e);
     }
