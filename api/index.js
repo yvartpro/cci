@@ -49,6 +49,10 @@ app.get('/api/health', (req, res) => res.json({ ok: true }))
 const articlesRouter = require('./routes/articles')
 app.use('/api/articles', articlesRouter)
 
+// Mount files router
+const filesRouter = require('./routes/files')
+app.use('/api/files', filesRouter)
+
 // POST /api/upload - accept multiple files under field name 'files'
 app.post('/api/upload', upload.array('files'), async (req, res) => {
   try {
