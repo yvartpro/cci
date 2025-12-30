@@ -1,9 +1,38 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
+const fs = require('fs')
+const multer = require('multer')
+const sharp = require('sharp')
 const db = require('../models')
 const blocksSvc = require('../services/articleBlocks')
 
 const Article = db.Article
+const FileModel = db.File
+
+// uploads dir (same as index.js)
+const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, '..', 'uploads')
+fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname)
+    const ts = Date.now()
+    cb(null, `upload_${ts}_${Math.round(Math.random() * 1e6)}${ext}`)
+  }
+})
+const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } })
+
+function isImage(mimetype) {
+  return mimetype && mimetype.startsWith('image/')
+}
+
+function fileUrl(req, filename) {
+  const protocol = req.protocol
+  const host = req.get('host')
+  return `${protocol}://${host}/uploads/${encodeURIComponent(filename)}`
+}
 
 // List articles (basic)
 router.get('/', async (req, res) => {
@@ -162,6 +191,66 @@ router.patch('/:id/blocks', async (req, res) => {
   } catch (err) {
     console.error(err)
     res.status(400).json({ error: err.message })
+  }
+})
+
+// Upload files and attach to article: POST /api/articles/:id/files
+router.post('/:id/files', upload.array('files'), async (req, res) => {
+  try {
+    const article = await Article.findByPk(req.params.id)
+    if (!article) return res.status(404).json({ error: 'Article not found' })
+
+    if (!req.files || !req.files.length) return res.status(400).json({ error: 'No files uploaded' })
+
+    const created = []
+    for (const f of req.files) {
+      const originalPath = f.path
+      const ext = path.extname(f.filename).toLowerCase()
+      let finalName = f.filename
+      let optimized = false
+
+      if (isImage(f.mimetype)) {
+        const outName = `opt_${path.basename(f.filename, ext)}.jpg`
+        const outPath = path.join(UPLOADS_DIR, outName)
+        try {
+          await sharp(originalPath)
+            .resize({ width: 1920, withoutEnlargement: true })
+            .jpeg({ quality: 75, mozjpeg: true })
+            .toFile(outPath)
+          // remove original
+          try { fs.unlinkSync(originalPath) } catch (e) {}
+          finalName = outName
+          optimized = true
+        } catch (e) {
+          // keep original
+        }
+      }
+
+      const url = fileUrl(req, finalName)
+      const fileRecord = await FileModel.create({
+        filename: finalName,
+        originalname: f.originalname,
+        mime: f.mimetype,
+        size: f.size,
+        url,
+        optimized
+      })
+
+      // associate with article
+      try {
+        await article.addFile(fileRecord)
+      } catch (e) {
+        console.error('associate failed', e.message || e)
+      }
+
+      created.push({ id: fileRecord.id, filename: finalName, url, optimized })
+    }
+
+    const refreshed = await Article.findByPk(req.params.id)
+    res.status(201).json({ files: created, article: refreshed })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: err.message })
   }
 })
 
