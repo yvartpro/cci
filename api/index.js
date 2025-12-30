@@ -9,6 +9,7 @@ require('dotenv').config()
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 const PORT = process.env.PORT || 5000
 const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, 'uploads')
@@ -43,6 +44,10 @@ app.use('/uploads', express.static(UPLOADS_DIR))
 
 // Simple health
 app.get('/api/health', (req, res) => res.json({ ok: true }))
+
+// Mount article routes
+const articlesRouter = require('./routes/articles')
+app.use('/api/articles', articlesRouter)
 
 // POST /api/upload - accept multiple files under field name 'files'
 app.post('/api/upload', upload.array('files'), async (req, res) => {
