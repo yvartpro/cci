@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+uploads/
+database.sqlite
+.DS_Store
+.vscode/
+.idea/
+coverage/
+npm-debug.log
+yarn-error.log
+.env.local
+.env.development
+.env.test
+.env.production 
+*.log
+*.sqlite
