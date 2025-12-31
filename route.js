@@ -2,6 +2,7 @@
  * CCI Website Routing and Component Loading
  */
 import { posts as allPosts } from './data/posts-data.js';
+import { formatDate } from './utils.js';
 
 const loadComponent = async (selector, filePath) => {
   try {
@@ -241,9 +242,3 @@ const init = async () => {
 };
 
 init();
-
-export const formatDate = (dateStr) => {
-  const date = new Date(dateStr);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('fr-FR', options);
-}
