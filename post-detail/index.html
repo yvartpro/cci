@@ -295,9 +295,9 @@
             // Update post meta
             document.getElementById('post-meta').innerHTML = `
                 <span class="px-4 py-2 bg-blue-100 text-blue-700 text-xs font-black uppercase tracking-widest rounded-full">${post.category}</span>
-                <span class="text-sm text-slate-500 font-medium">${post.date}</span>
+                <span class="text-sm text-slate-500 font-medium">${post.createdAt}</span>
                 <span class="text-sm text-slate-500">•</span>
-                <span class="text-sm text-slate-500 font-medium">${post.readTime} de lecture</span>
+                <span class="text-sm text-slate-500 font-medium">${post.readTime || "5min"} de lecture</span>
             `;
 
             // Update title and author
@@ -310,7 +310,7 @@
             `;
 
             // Update content
-            document.getElementById('article-content').innerHTML = post.content;
+            document.getElementById('article-content').innerHTML = renderArticleContent(post);
 
             // Update tags
             const tagsHTML = post.tags.map(tag => `
@@ -318,6 +318,55 @@
             `).join('');
             document.getElementById('post-tags').innerHTML += tagsHTML;
         };
+
+        // rendererHtml
+        const renderArticleContent = (article) => {
+            if (!article?.sections) return '';
+
+            return article.sections.map(section => `
+                <section class="mb-16">
+                ${section.title ? `
+                    <h2 class="border-l-4 border-blue-700 pl-4">
+                    ${section.title}
+                    </h2>
+                ` : ''}
+
+                ${section.blocks.map(block => {
+                    switch (block.type) {
+                    case 'text':
+                        return `
+                        <div class="article-block-text">
+                            ${block.value}
+                        </div>
+                        `;
+
+                    case 'quote':
+                        return `
+                        <blockquote class="article-block-quote">
+                            ${block.value}
+                        </blockquote>
+                        `;
+
+                    case 'image':
+                        return `
+                        <figure class="my-10">
+                            <img
+                            src="${block.value}"
+                            alt=""
+                            class="w-full rounded-3xl shadow-lg"
+                            loading="lazy"
+                            >
+                        </figure>
+                        `;
+
+                    default:
+                        return '';
+                    }
+                }).join('')}
+                </section>
+            `).join('');
+        };
+
 
         // Load related posts
         const loadRelatedPosts = () => {

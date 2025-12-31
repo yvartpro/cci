@@ -5,6 +5,8 @@ const fs = require('fs')
 const multer = require('multer')
 const sharp = require('sharp')
 const db = require('../models')
+const { normalizeSequelizeError } = require('../tools/helper')
+
 
 const FileModel = db.File
 
@@ -19,6 +21,7 @@ const storage = multer.diskStorage({
     cb(null, `upload_${ts}_${Math.round(Math.random() * 1e6)}${ext}`)
   }
 })
+
 const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } })
 
 function isImage(mimetype) { return mimetype && mimetype.startsWith('image/') }
@@ -45,13 +48,13 @@ router.post('/', upload.array('files'), async (req, res) => {
   try {
     if (!req.files || !req.files.length) return res.status(400).json({ error: 'No files uploaded' })
     const created = []
-    for (const f of req.files) {
-      const originalPath = f.path
-      const ext = path.extname(f.filename).toLowerCase()
-      let finalName = f.filename
+    for (const file of req.files) {
+      const originalPath = file.path
+      const ext = path.extname(file.filename).toLowerCase()
+      let finalName = file.filename
       let optimized = false
-      if (isImage(f.mimetype)) {
-        const outName = `opt_${path.basename(f.filename, ext)}.jpg`
+      if (isImage(file.mimetype)) {
+        const outName = `opt_${path.basename(file.filename, ext)}.jpg`
         const outPath = path.join(UPLOADS_DIR, outName)
         try {
           await sharp(originalPath)
@@ -66,13 +69,12 @@ router.post('/', upload.array('files'), async (req, res) => {
         }
       }
       const url = fileUrl(req, finalName)
-      const rec = await FileModel.create({ filename: finalName, originalname: f.originalname, mime: f.mimetype, size: f.size, url, optimized })
+      const rec = await FileModel.create({ filename: finalName, originalname: file.originalname, mime: file.mimetype, size: file.size, url, optimized })
       created.push({ id: rec.id, filename: finalName, url, optimized })
     }
     res.status(201).json({ files: created })
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: err.message })
+    res.status(500).json({ error: normalizeSequelizeError(err) } )
   }
 })
 

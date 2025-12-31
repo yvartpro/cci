@@ -16,10 +16,7 @@ const PORT = process.env.PORT || 5000
 // 🔒 ALWAYS resolve relative to this file (cci/api/index.js)
 const UPLOADS_DIR = path.resolve(__dirname, 'uploads')
 /* -------------------- STATIC FILES -------------------- */
-// URL → /api/uploads/xxx.jpg
-// DISK → cci/api/uploads/xxx.jpg
 app.use('/uploads', express.static(UPLOADS_DIR))      // old URLs
-app.use('/api/uploads', express.static(UPLOADS_DIR))  // new URLs
 
 // ensure uploads dir exists
 fs.mkdirSync(UPLOADS_DIR, { recursive: true })

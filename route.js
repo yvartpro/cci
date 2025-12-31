@@ -1,6 +1,7 @@
 /**
  * CCI Website Routing and Component Loading
  */
+import { posts as allPosts } from './data/posts-data.js';
 
 const loadComponent = async (selector, filePath) => {
   try {
@@ -93,21 +94,18 @@ const loadPosts = async () => {
   const postsContainer = document.querySelector("#posts");
   if (!postsContainer) return;
 
-  // Import posts data (module-relative)
-  const { getAllPosts } = await import(new URL('./data/posts-data.js', import.meta.url).href);
-  const allPosts = getAllPosts();
-  const mockPosts = allPosts.slice(0, 6);
+  const posts = allPosts.slice(0, 6);
 
-  postsContainer.innerHTML = mockPosts.map(post => `
+  postsContainer.innerHTML = posts.map(post => `
     <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-slate-100 flex flex-col h-full group">
       <div class="relative h-64 overflow-hidden">
-        <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <img src="${post.hero_url}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
         <div class="absolute top-4 left-4">
           <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/90 backdrop-blur text-blue-700 shadow-sm">${post.category}</span>
         </div>
       </div>
       <div class="p-8 flex-grow">
-        <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">${post.date}</div>
+        <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">${formatDate(post.createdAt)}</div>
         <h3 class="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-tight mb-4">${post.title}</h3>
         <p class="text-slate-500 text-sm leading-relaxed">${post.excerpt}</p>
       </div>
@@ -244,4 +242,8 @@ const init = async () => {
 
 init();
 
-export const title = "CCI Rumonge – Centre Communautaire d'Iteba";
+export const formatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('fr-FR', options);
+}

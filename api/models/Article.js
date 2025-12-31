@@ -13,12 +13,12 @@ module.exports = (sequelize) => {
   const Article = sequelize.define('Article', {
     id: { type: DataTypes.INTEGER.UNSIGNED, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
+    category: { type: DataTypes.STRING },
     subtitle: { type: DataTypes.STRING },
     slug: { type: DataTypes.STRING, allowNull: false, unique: true },
     excerpt: { type: DataTypes.TEXT },
 
-    // Rich structured content: array of blocks/sections
-    blocks: { type: DataTypes.JSON, allowNull: false, defaultValue: [] },
+    sections: { type: DataTypes.JSON, allowNull: false, defaultValue: [] },
 
     // Optional canonical hero image info (can reference File by id in app logic)
     hero_url: { type: DataTypes.STRING },
