@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
   const Article = sequelize.define('Article', {
     id: { type: DataTypes.INTEGER.UNSIGNED, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
-    category: { type: DataTypes.STRING },
+    category: { type: DataTypes.ENUM('LaSTAR', 'CCI Invest', 'CCI Social') },
     subtitle: { type: DataTypes.STRING },
     slug: { type: DataTypes.STRING, allowNull: false, unique: true },
     excerpt: { type: DataTypes.TEXT },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
     meta: { type: DataTypes.JSON, allowNull: false, defaultValue: {} },
 
     // status and publication
-    status: { type: DataTypes.ENUM('draft','published','archived'), allowNull: false, defaultValue: 'draft' },
+    status: { type: DataTypes.ENUM('draft', 'published', 'archived'), allowNull: false, defaultValue: 'draft' },
     published_at: { type: DataTypes.DATE },
 
     // author and misc
