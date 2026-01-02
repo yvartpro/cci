@@ -12,29 +12,29 @@ const loadComponent = async (selector, filePath) => {
     const html = await response.text();
     const container = document.querySelector(selector);
     if (container) {
-        container.innerHTML = html;
+      container.innerHTML = html;
 
-        // Execute scripts from the injected HTML (both external and inline)
-        try {
-          const scripts = Array.from(container.querySelectorAll('script'));
-          for (const oldScript of scripts) {
-            const newScript = document.createElement('script');
-            if (oldScript.src) {
-              newScript.src = oldScript.src;
-              if (oldScript.type) newScript.type = oldScript.type;
-              document.head.appendChild(newScript);
-            } else {
-              newScript.textContent = oldScript.textContent;
-              document.head.appendChild(newScript);
-            }
-            oldScript.remove();
+      // Execute scripts from the injected HTML (both external and inline)
+      try {
+        const scripts = Array.from(container.querySelectorAll('script'));
+        for (const oldScript of scripts) {
+          const newScript = document.createElement('script');
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+            if (oldScript.type) newScript.type = oldScript.type;
+            document.head.appendChild(newScript);
+          } else {
+            newScript.textContent = oldScript.textContent;
+            document.head.appendChild(newScript);
           }
-        } catch (e) {
-          // ignore
+          oldScript.remove();
         }
+      } catch (e) {
+        // ignore
+      }
 
-        // If header initializer is available, call it
-        try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
+      // If header initializer is available, call it
+      try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) { }
     }
   } catch (err) {
     console.error("Error loading component:", err.message);
@@ -106,9 +106,11 @@ const loadPosts = async () => {
         </div>
       </div>
       <div class="p-8 flex-grow">
-        <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">${formatDate(post.createdAt)}</div>
+        <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">
+          ${formatDate(post.createdAt)} | ${post.views_count} views
+        </div>
         <h3 class="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-tight mb-4">${post.title}</h3>
-        <p class="text-slate-500 text-sm leading-relaxed">${post.excerpt}</p>
+        <p class="text-slate-500 text-sm leading-relaxed"></p>
       </div>
       <div class="px-8 pb-8 pt-4">
         <a href="post-detail/?id=${post.id}" class="inline-flex items-center text-xs font-black uppercase tracking-widest text-blue-600 hover:text-emerald-600 transition-colors group/link">
