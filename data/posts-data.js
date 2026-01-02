@@ -1,14 +1,20 @@
 // Mock post database
 const fetchPosts = async () => {
-  const resp = await fetch('http://localhost:5000/api/articles');
-  const data = await resp.json();
-  return data;
+    const resp = await fetch('http://localhost:5000/api/articles');
+    const data = await resp.json();
+    return data;
+}
+
+const fetchPost = async (id) => {
+    const resp = await fetch(`http://localhost:5000/api/articles/${id}`);
+    const data = await resp.json();
+    return data;
 }
 export const posts = await fetchPosts()
 console.log("Loaded posts data:", posts);
 // Get post by ID
-export const getPostById = (id) => {
-    return posts.find(post => post.id === parseInt(id));
+export const getPostById = async (id) => {
+    return await fetchPost(id)
 };
 
 // Get related posts (exclude current post)
