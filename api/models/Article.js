@@ -18,9 +18,9 @@ module.exports = (sequelize) => {
     slug: { type: DataTypes.STRING, allowNull: false, unique: true },
     excerpt: { type: DataTypes.TEXT },
 
+
     sections: { type: DataTypes.JSON, allowNull: false, defaultValue: [] },
 
-    // Optional canonical hero image info (can reference File by id in app logic)
     hero_url: { type: DataTypes.STRING },
     hero_file_id: { type: DataTypes.INTEGER.UNSIGNED },
 
@@ -36,6 +36,7 @@ module.exports = (sequelize) => {
     author_name: { type: DataTypes.STRING },
     language: { type: DataTypes.ENUM('fr', 'en', 'sw', 'rn'), defaultValue: 'fr' },
     reading_time: { type: DataTypes.INTEGER.UNSIGNED },
+    views_count: { type: DataTypes.INTEGER.UNSIGNED, defaultValue: 0 },
 
     // versioning / flags
     version: { type: DataTypes.INTEGER.UNSIGNED, defaultValue: 1 },

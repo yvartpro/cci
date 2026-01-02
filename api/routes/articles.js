@@ -57,11 +57,15 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Get single
+// Get single and increase views
 router.get('/:id', async (req, res) => {
+  console.log("fetching post by it's ID")
   try {
     const a = await Article.findByPk(req.params.id)
     if (!a) return res.status(404).json({ error: 'Not found' })
+    await a.increment('views_count')
+    await a.reload()
+    console.log(a.views_count)
     res.json(a)
   } catch (err) {
     console.error(err)
@@ -218,7 +222,7 @@ router.post('/:id/files', upload.array('files'), async (req, res) => {
             .jpeg({ quality: 75, mozjpeg: true })
             .toFile(outPath)
           // remove original
-          try { fs.unlinkSync(originalPath) } catch (e) {}
+          try { fs.unlinkSync(originalPath) } catch (e) { }
           finalName = outName
           optimized = true
         } catch (e) {
