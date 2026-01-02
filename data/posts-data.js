@@ -19,8 +19,9 @@ export const getPostById = async (id) => {
 
 // Get related posts (exclude current post)
 export const getRelatedPosts = (currentId, limit = 4) => {
+    const currentPost = posts.find(post => post.id == currentId)
     return posts
-        .filter(post => post.id !== parseInt(currentId))
+        .filter(post => post.category == currentPost.category && post.id !== parseInt(currentId))
         .slice(0, limit);
 };
 
