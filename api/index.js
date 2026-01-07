@@ -57,6 +57,9 @@ app.use('/api/articles', articlesRouter)
 const filesRouter = require('./routes/files')
 app.use('/api/files', filesRouter)
 
+const volunteersRouter = require('./routes/volunteers')
+app.use('/api/volunteers', volunteersRouter)
+
 /* -------------------- UPLOAD -------------------- */
 
 app.post('/api/upload', upload.array('files'), async (req, res) => {

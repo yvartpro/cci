@@ -324,6 +324,40 @@
         </div>
     </section>
 
+    <!-- Our Volunteers Section -->
+    <section class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-slate-900">Nos Volontaires</h2>
+                <div class="h-1.5 w-20 bg-emerald-500 mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-600 mt-4 max-w-2xl mx-auto">
+                    Découvrez les personnes dévouées qui font la différence dans notre communauté
+                </p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="volunteers-loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+                <p class="text-slate-500 mt-4">Chargement des volontaires...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="volunteers-error" class="hidden text-center py-12">
+                <p class="text-red-600">Erreur lors du chargement des volontaires.</p>
+            </div>
+
+            <!-- Volunteers Grid -->
+            <div id="volunteers-grid" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Volunteers will be inserted here by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="volunteers-empty" class="hidden text-center py-12">
+                <p class="text-slate-500">Aucun volontaire à afficher pour le moment.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Application CTA -->
     <section id="postuler" class="py-24 bg-gradient-to-br from-blue-900 to-emerald-900">
         <div class="max-w-4xl mx-auto px-6 text-center">
@@ -350,11 +384,124 @@
     <script type="module">
         import { loadComponent, initMobileMenu } from './component/script.js';
 
+        // API Configuration
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        // Category color mapping
+        const categoryColors = {
+            'Education': 'bg-blue-100 text-blue-700',
+            'Environment': 'bg-emerald-100 text-emerald-700',
+            'Formation': 'bg-purple-100 text-purple-700',
+            'Leadership': 'bg-amber-100 text-amber-700'
+        };
+
+        // Get initials from name
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+        }
+
+        // Truncate text
+        function truncate(text, maxLength = 150) {
+            if (!text) return '';
+            if (text.length <= maxLength) return text;
+            return text.slice(0, maxLength) + '...';
+        }
+
+        // Strip HTML tags from bio
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        // Load volunteers from API
+        async function loadVolunteers() {
+            const loadingEl = document.getElementById('volunteers-loading');
+            const errorEl = document.getElementById('volunteers-error');
+            const gridEl = document.getElementById('volunteers-grid');
+            const emptyEl = document.getElementById('volunteers-empty');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/volunteers?status=active`);
+                if (!response.ok) throw new Error('Failed to fetch volunteers');
+
+                const volunteers = await response.json();
+
+                loadingEl.classList.add('hidden');
+
+                if (volunteers.length === 0) {
+                    emptyEl.classList.remove('hidden');
+                    return;
+                }
+
+                // Render volunteers
+                gridEl.innerHTML = volunteers.map(volunteer => {
+                    const categoryClass = categoryColors[volunteer.category] || 'bg-gray-100 text-gray-700';
+                    const initials = getInitials(volunteer.name);
+                    const bioText = stripHtml(volunteer.bio || '');
+                    const shortBio = truncate(bioText);
+
+                    return `
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                            <!-- Image or Initials -->
+                            <div class="mb-6">
+                                ${volunteer.image_url
+                            ? `<img src="${volunteer.image_url}" alt="${volunteer.name}" class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-emerald-100">`
+                            : `<div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white font-black text-2xl mx-auto">${initials}</div>`
+                        }
+                            </div>
+
+                            <!-- Name and Role -->
+                            <div class="text-center mb-4">
+                                <h3 class="text-xl font-bold text-slate-900 mb-1">${volunteer.name}</h3>
+                                ${volunteer.role ? `<p class="text-sm text-slate-500">${volunteer.role}</p>` : ''}
+                            </div>
+
+                            <!-- Category Badge -->
+                            ${volunteer.category
+                            ? `<div class="flex justify-center mb-4">
+                                    <span class="px-3 py-1 ${categoryClass} text-xs font-black uppercase tracking-widest rounded-full">
+                                        ${volunteer.category}
+                                    </span>
+                                </div>`
+                            : ''
+                        }
+
+                            <!-- Bio -->
+                            ${shortBio
+                            ? `<p class="text-slate-600 text-sm leading-relaxed">${shortBio}</p>`
+                            : ''
+                        }
+
+                            <!-- Testimonial -->
+                            ${volunteer.testimonial
+                            ? `<p class="text-slate-600 text-sm italic mt-4 pt-4 border-t border-slate-100">"${truncate(volunteer.testimonial, 120)}"</p>`
+                            : ''
+                        }
+                        </div>
+                    `;
+                }).join('');
+
+                gridEl.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error loading volunteers:', error);
+                loadingEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+            }
+        }
+
         // Initialize
         const init = async () => {
             await Promise.all([
                 loadComponent("#header", "./header.html"),
-                loadComponent("#footer", "./footer.html")
+                loadComponent("#footer", "./footer.html"),
+                loadVolunteers()
             ]);
 
             initMobileMenu();

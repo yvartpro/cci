@@ -19,9 +19,13 @@ const db = { sequelize, Sequelize }
 
 db.File = require('./File')(sequelize)
 db.Article = require('./Article')(sequelize)
+db.Volunteer = require('./Volunteer')(sequelize)
 
 // associations
 db.Article.belongsToMany(db.File, { through: 'article_files', as: 'files' })
 db.File.belongsToMany(db.Article, { through: 'article_files', as: 'articles' })
+
+db.Volunteer.belongsToMany(db.File, { through: 'volunteer_files', as: 'files' })
+db.File.belongsToMany(db.Volunteer, { through: 'volunteer_files', as: 'volunteers' })
 
 module.exports = db
