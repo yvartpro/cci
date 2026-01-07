@@ -59,14 +59,18 @@ router.post('/', async (req, res) => {
 
 // Get single and increase views
 router.get('/:id', async (req, res) => {
-  console.log("fetching post by it's ID")
   try {
     const a = await Article.findByPk(req.params.id)
     if (!a) return res.status(404).json({ error: 'Not found' })
     await a.increment('views_count')
     await a.reload()
-    console.log(a.views_count)
-    res.json(a)
+
+    const article = a.toJSON() // get plain object
+    article.sections = Array.isArray(article.sections) ? article.sections : JSON.parse(article.sections || '[]')
+    article.tags = Array.isArray(article.tags) ? article.tags : JSON.parse(article.tags || '[]')
+    article.meta = typeof article.meta === 'object' ? article.meta : JSON.parse(article.meta || '{}')
+
+    res.json(article)
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: err.message })
