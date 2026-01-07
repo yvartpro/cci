@@ -6,6 +6,8 @@ import { loadPosts, loadComponent, initMobileMenu } from './component/script.js'
 
 
 
+export const API_BASE_URL = 'https://capbio.bi/cci/api';
+
 /**
  * Handles the Carousel Slider Logic
  */
