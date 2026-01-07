@@ -3,6 +3,7 @@
  */
 import { posts as allPosts } from './data/posts-data.js';
 import { formatDate } from './utils.js';
+import { loadPosts } from './component/script.js';
 
 const loadComponent = async (selector, filePath) => {
   try {
@@ -88,39 +89,7 @@ const initCarousel = () => {
   updateSlider();
 };
 
-/**
- * Loads and renders 6 blog posts
- */
-const loadPosts = async () => {
-  const postsContainer = document.querySelector("#posts");
-  if (!postsContainer) return;
 
-  const posts = allPosts.slice(0, 6);
-
-  postsContainer.innerHTML = posts.map(post => `
-    <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-slate-100 flex flex-col h-full group">
-      <div class="relative h-64 overflow-hidden">
-        <img src="${post.hero_url}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute top-4 left-4">
-          <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/90 backdrop-blur text-blue-700 shadow-sm">${post.category}</span>
-        </div>
-      </div>
-      <div class="p-8 flex-grow">
-        <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">
-          ${formatDate(post.createdAt)} | ${post.views_count} views
-        </div>
-        <h3 class="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-tight mb-4">${post.title}</h3>
-        <p class="text-slate-500 text-sm leading-relaxed"></p>
-      </div>
-      <div class="px-8 pb-8 pt-4">
-        <a href="post-detail/?id=${post.id}" class="inline-flex items-center text-xs font-black uppercase tracking-widest text-blue-600 hover:text-emerald-600 transition-colors group/link">
-          Lire la suite
-          <svg class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-        </a>
-      </div>
-    </article>
-  `).join('');
-};
 
 /**
  * Handles the Mobile Menu Toggle Logic (Off-Canvas)
@@ -238,7 +207,7 @@ const init = async () => {
     loadComponent("#partners", "component/partners.html")
   ]);
 
-  await loadPosts();
+  await loadPosts("#posts", allPosts, 6);
   initCarousel();
   initMobileMenu();
 };

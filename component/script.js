@@ -1,6 +1,7 @@
+import { formatDate } from "../utils.js";
+
 export const loadPosts = async (selector, posts, limit = 6) => {
   const postsContainer = document.querySelector(selector);
-  console.log(postsContainer)
 
   if (!postsContainer) {
     console.error("Posts container not found:", selector);

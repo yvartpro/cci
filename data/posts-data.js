@@ -1,4 +1,3 @@
-// Mock post database
 const fetchPosts = async () => {
     const resp = await fetch('https://capbio.bi/cci/api/articles');
     const data = await resp.json();
@@ -11,13 +10,10 @@ const fetchPost = async (id) => {
     return data;
 }
 export const posts = await fetchPosts()
-console.log("Loaded posts data:", posts);
-// Get post by ID
 export const getPostById = async (id) => {
     return await fetchPost(id)
 };
 
-// Get related posts (exclude current post)
 export const getRelatedPosts = (currentId, limit = 4) => {
     const currentPost = posts.find(post => post.id == currentId)
     return posts
@@ -25,7 +21,6 @@ export const getRelatedPosts = (currentId, limit = 4) => {
         .slice(0, limit);
 };
 
-// Get all posts for listing
 export const getAllPosts = () => {
     return posts;
 };

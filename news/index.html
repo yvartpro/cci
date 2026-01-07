@@ -7,7 +7,7 @@
     <base href="/cci/">
     <meta name="description"
         content="Actualités et nouvelles du Centre Communautaire d'Iteba - Restez informé de nos activités et événements à Rumonge.">
-          <!-- Favicons & SEO -->
+    <!-- Favicons & SEO -->
     <link rel="icon" href="/cci/public/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/cci/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/cci/public/icon-192.png">
@@ -111,6 +111,7 @@
     <script type="module">
         import { posts as allPosts } from './data/posts-data.js';
         import { formatDate } from './utils.js';
+        import { loadPosts } from './component/script.js';
         // Load components and execute any scripts inside the fetched HTML
         const loadComponent = async (selector, filePath) => {
             try {
@@ -136,40 +137,14 @@
                         oldScript.remove();
                     }
 
-                    try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
+                    try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) { }
                 }
             } catch (err) {
                 console.error("Error loading component:", err.message);
             }
         };
 
-        // Load posts
-        const loadPosts = async () => {
-            const postsContainer = document.querySelector("#posts");
-            if (!postsContainer) return;
 
-            postsContainer.innerHTML = allPosts.map(post => `
-                <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-slate-100 flex flex-col h-full group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="${post.hero_url}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute top-4 left-4">
-                    <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/90 backdrop-blur text-blue-700 shadow-sm">${post.category}</span>
-                    </div>
-                </div>
-                <div class="p-8 flex-grow">
-                    <div class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">${formatDate(post.createdAt)}</div>
-                    <h3 class="text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors leading-tight mb-4">${post.title}</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">${post.excerpt}</p>
-                </div>
-                    <div class="px-8 pb-8 pt-4">
-                    <a href="post-detail/?id=${post.id}" class="inline-flex items-center text-xs font-black uppercase tracking-widest text-blue-600 hover:text-emerald-600 transition-colors group/link">
-                    Lire la suite
-                    <svg class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </a>
-                </div>
-                </article>
-            `).join('');
-        };
 
         // Mobile menu logic
         const initMobileMenu = () => {
@@ -243,7 +218,7 @@
                 loadComponent("#footer", "./component/footer.html")
             ]);
 
-            await loadPosts();
+            await loadPosts("#posts", allPosts);
             initMobileMenu();
         };
 
