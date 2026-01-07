@@ -1,12 +1,12 @@
 // Mock post database
 const fetchPosts = async () => {
-    const resp = await fetch('http://localhost:5000/api/articles');
+    const resp = await fetch('https://capbio.bi/cci/api/articles');
     const data = await resp.json();
     return data;
 }
 
 const fetchPost = async (id) => {
-    const resp = await fetch(`http://localhost:5000/api/articles/${id}`);
+    const resp = await fetch(`https://capbio.bi/cci/api/articles/${id}`);
     const data = await resp.json();
     return data;
 }
