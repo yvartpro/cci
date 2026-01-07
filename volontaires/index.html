@@ -7,7 +7,7 @@
     <base href="/cci/">
     <meta name="description"
         content="Rejoignez notre équipe de volontaires au CCI Rumonge. Contribuez au développement communautaire et faites la différence.">
-          <!-- Favicons & SEO -->
+    <!-- Favicons & SEO -->
     <link rel="icon" href="/cci/public/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/cci/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/cci/public/icon-192.png">
@@ -348,108 +348,13 @@
     <div id="footer"></div>
 
     <script type="module">
-        // Load components and execute any scripts inside the fetched HTML
-        const loadComponent = async (selector, filePath) => {
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error(`Failed to load ${filePath}`);
-                const html = await response.text();
-                const container = document.querySelector(selector);
-                if (container) {
-                    container.innerHTML = html;
-
-                    // Execute scripts from the injected HTML (both external and inline)
-                    const scripts = Array.from(container.querySelectorAll('script'));
-                    for (const oldScript of scripts) {
-                        const newScript = document.createElement('script');
-                        if (oldScript.src) {
-                            newScript.src = oldScript.src;
-                            if (oldScript.type) newScript.type = oldScript.type;
-                            document.head.appendChild(newScript);
-                        } else {
-                            newScript.textContent = oldScript.textContent;
-                            document.head.appendChild(newScript);
-                        }
-                        oldScript.remove();
-                    }
-
-                    try { if (window.__cci_initHeader) window.__cci_initHeader(); } catch (e) {}
-                }
-            } catch (err) {
-                console.error("Error loading component:", err.message);
-            }
-        };
-
-        // Mobile menu logic
-        const initMobileMenu = () => {
-            const menuBtn = document.querySelector("#mobile-menu-btn");
-            const closeBtn = document.querySelector("#mobile-menu-close");
-            const mobileMenu = document.querySelector("#mobile-menu");
-            const overlay = document.querySelector("#mobile-menu-overlay");
-
-            if (!menuBtn || !mobileMenu || !overlay || !closeBtn) return;
-
-            const openMenu = () => {
-                overlay.classList.remove("hidden");
-                mobileMenu.classList.remove("hidden");
-
-                setTimeout(() => {
-                    overlay.classList.remove("opacity-0");
-                    overlay.classList.add("opacity-100");
-                    mobileMenu.classList.remove("translate-x-full");
-                    mobileMenu.classList.add("translate-x-0");
-                }, 10);
-
-                document.documentElement.style.overflow = "hidden";
-                document.body.style.overflow = "hidden";
-                document.body.style.position = "fixed";
-                document.body.style.width = "100%";
-            };
-
-            const closeMenu = () => {
-                overlay.classList.remove("opacity-100");
-                overlay.classList.add("opacity-0");
-                mobileMenu.classList.remove("translate-x-0");
-                mobileMenu.classList.add("translate-x-full");
-
-                setTimeout(() => {
-                    overlay.classList.add("hidden");
-                    mobileMenu.classList.add("hidden");
-                }, 500);
-
-                document.documentElement.style.overflow = "";
-                document.body.style.overflow = "";
-                document.body.style.position = "";
-                document.body.style.width = "";
-            };
-
-            menuBtn.addEventListener("click", openMenu);
-            closeBtn.addEventListener("click", closeMenu);
-
-            overlay.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                closeMenu();
-            });
-
-            overlay.addEventListener("touchmove", (e) => {
-                e.preventDefault();
-            }, { passive: false });
-
-            overlay.addEventListener("wheel", (e) => {
-                e.preventDefault();
-            }, { passive: false });
-
-            mobileMenu.querySelectorAll("a").forEach(link => {
-                link.addEventListener("click", closeMenu);
-            });
-        };
+        import { loadComponent, initMobileMenu } from './component/script.js';
 
         // Initialize
         const init = async () => {
             await Promise.all([
-                loadComponent("#header", "./component/header.html"),
-                loadComponent("#footer", "./component/footer.html")
+                loadComponent("#header", "./header.html"),
+                loadComponent("#footer", "./footer.html")
             ]);
 
             initMobileMenu();
