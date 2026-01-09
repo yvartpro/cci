@@ -195,3 +195,141 @@ export const loadPosts = async (selector, posts, limit = 6) => {
     </article>
   `).join("");
 };
+
+/**
+ * Loads and renders carousel slides
+ * @param {string} innerSelector - CSS selector for the carousel inner container
+ * @param {string} dotsSelector - CSS selector for the dots container
+ */
+export const loadCarousel = async (innerSelector, dotsSelector) => {
+  const inner = document.querySelector(innerSelector);
+  const dotsContainer = document.querySelector(dotsSelector);
+
+  if (!inner) {
+    console.error("Carousel inner container not found:", innerSelector);
+    return;
+  }
+
+  try {
+    const resp = await fetch('https://capbio.bi/cci/api/carousel');
+    if (!resp.ok) throw new Error('Failed to fetch carousel data');
+    const slidesData = await resp.json();
+
+    if (!slidesData || slidesData.length === 0) {
+      inner.innerHTML = '<div class="min-w-full h-full flex items-center justify-center text-slate-500">No content available</div>';
+      return;
+    }
+
+    // Render slides
+    inner.innerHTML = slidesData.map((slide, index) => `
+      <div class="min-w-full h-full relative ${index !== slidesData.length - 1 ? 'border-r border-white/10' : ''} overflow-hidden">
+        <img src="${slide.image_url}" alt="${slide.title}" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
+          <div class="max-w-2xl">
+            <h3 class="text-4xl font-bold text-white mb-4">${slide.title}</h3>
+            <p class="text-slate-200 text-lg">${slide.excerpt}</p>
+          </div>
+        </div>
+      </div>
+    `).join("");
+
+    // Render dots if container exists
+    if (dotsContainer) {
+      dotsContainer.innerHTML = slidesData.map((_, index) => `
+        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all ${index === 0 ? 'bg-blue-500 w-8' : ''}" data-index="${index}"></div>
+      `).join("");
+    }
+
+    return slidesData.length;
+  } catch (err) {
+    console.error("Error loading carousel:", err.message);
+    return 0;
+  }
+};
+
+/**
+ * Initializes the carousel slider logic
+ * @param {Object} config - Configuration for the carousel
+ */
+export const initCarouselSlider = (config = {}) => {
+  const {
+    innerSelector = "#carousel-inner",
+    nextSelector = "#next-btn",
+    prevSelector = "#prev-btn",
+    dotSelector = ".dot",
+    autoPlayInterval = 4000
+  } = config;
+
+  const inner = document.querySelector(innerSelector);
+  const nextBtn = document.querySelector(nextSelector);
+  const prevBtn = document.querySelector(prevSelector);
+
+  if (!inner || !nextBtn || !prevBtn) return;
+
+  let currentIndex = 0;
+  let autoPlayTimer = null;
+
+  const updateSlider = () => {
+    const slides = inner.children;
+    const slideCount = slides.length;
+    if (slideCount === 0) return;
+
+    currentIndex = (currentIndex + slideCount) % slideCount;
+    inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Update dots
+    const dots = document.querySelectorAll(dotSelector);
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.classList.add("bg-blue-500", "w-8");
+        dot.classList.remove("bg-white/40", "w-2");
+      } else {
+        dot.classList.remove("bg-blue-500", "w-8");
+        dot.classList.add("bg-white/40", "w-2");
+      }
+    });
+  };
+
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(() => {
+      currentIndex++;
+      updateSlider();
+    }, autoPlayInterval);
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayTimer) clearInterval(autoPlayTimer);
+  };
+
+  nextBtn.addEventListener("click", () => {
+    stopAutoPlay();
+    currentIndex++;
+    updateSlider();
+    startAutoPlay();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    stopAutoPlay();
+    currentIndex--;
+    updateSlider();
+    startAutoPlay();
+  });
+
+  // Dot clicks
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("dot")) {
+      stopAutoPlay();
+      currentIndex = parseInt(e.target.dataset.index);
+      updateSlider();
+      startAutoPlay();
+    }
+  });
+
+  // Pause on hover
+  inner.addEventListener("mouseenter", stopAutoPlay);
+  inner.addEventListener("mouseleave", startAutoPlay);
+
+  updateSlider();
+  startAutoPlay();
+};

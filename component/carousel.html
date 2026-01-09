@@ -1,94 +1,10 @@
 <div class="carousel-container relative overflow-hidden h-[500px] bg-slate-100 rounded-3xl mx-6 shadow-2xl group">
     <div id="carousel-inner" class="flex h-full transition-transform duration-700 ease-in-out">
-        <!-- Slide 1 -->
-        <div class="min-w-full h-full relative border-r border-white/10 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80"
-                alt="Education Program" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Éducation pour Tous</h3>
-                    <p class="text-slate-200 text-lg">Nous soutenons l'éducation des enfants vulnérables à Rumonge à
-                        travers des bourses et du matériel scolaire.</p>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="min-w-full h-full relative border-r border-white/10 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80"
-                alt="Environmental Project" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Protection de l'Environnement</h3>
-                    <p class="text-slate-200 text-lg">Le projet TAXEL vise à restaurer l'écosystème local et à
-                        sensibiliser la communauté.</p>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="min-w-full h-full relative border-r border-white/10 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1504159506859-f9035728321e?auto=format&fit=crop&w=1200&q=80"
-                alt="Vocational Training" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Atelier de Couture</h3>
-                    <p class="text-slate-200 text-lg">Formation professionnelle pour les jeunes filles afin de favoriser
-                        leur autonomie financière.</p>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 4 -->
-        <div class="min-w-full h-full relative border-r border-white/10 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80"
-                alt="Community Support" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Soutien Social</h3>
-                    <p class="text-slate-200 text-lg">CCI Social accompagne les familles en difficulté avec des
-                        programmes de nutrition et de santé.</p>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 5 -->
-        <div class="min-w-full h-full relative border-r border-white/10 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
-                alt="Youth Leadership" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Leadership des Jeunes</h3>
-                    <p class="text-slate-200 text-lg">Notre programme LaSTAR identifie et cultive les talents de demain.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 6 -->
-        <div class="min-w-full h-full relative overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
-                alt="Innovation Hub" class="w-full h-full object-cover">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex items-end p-12">
-                <div class="max-w-2xl">
-                    <h3 class="text-4xl font-bold text-white mb-4">Centre d'Innovation</h3>
-                    <p class="text-slate-200 text-lg">Un espace dédié au partage de connaissances et aux projets
-                        technologiques.</p>
-                </div>
-            </div>
-        </div>
+        <!-- Dynamic slides will be injected here -->
     </div>
 
     <!-- Pagination Dots -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-        <div
-            class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all active-dot:w-8 active-dot:bg-blue-500">
-        </div>
-        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></div>
-        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></div>
-        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></div>
-        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></div>
-        <div class="dot w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></div>
+    <div id="carousel-dots" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+        <!-- Dynamic dots will be injected here -->
     </div>
 </div>
