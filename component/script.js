@@ -387,3 +387,135 @@ export const loadPartners = async (selector, partners) => {
     </div>
   `).join("");
 };
+
+/**
+ * Loads and renders comitards (committee members)
+ * @param {string} selector - CSS selector for the comitards container
+ */
+export const loadComitards = async (selector) => {
+  const container = document.querySelector(selector);
+  if (!container) return;
+
+  try {
+    const resp = await fetch('https://capbio.bi/cci/api/comitard');
+    if (!resp.ok) throw new Error('Failed to fetch comitards data');
+    const data = await resp.json();
+
+    if (!data || data.length === 0) {
+      container.innerHTML = "";
+      return;
+    }
+
+    // Sort by titre.ordre (ascending)
+    const sortedData = [...data].sort((a, b) => {
+      const orderA = a.titre?.ordre ?? 999;
+      const orderB = b.titre?.ordre ?? 999;
+      return orderA - orderB;
+    });
+
+    const getInitials = (name) => {
+      if (!name) return 'C';
+      return name
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+    };
+
+
+    container.innerHTML = `
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        ${sortedData.map(member => {
+      const initials = getInitials(member.name);
+      const displayImage = member.image_url || member.image?.url;
+      const displayTitle = member.titre?.name;
+      const links = Array.isArray(member.links) ? member.links : [];
+
+      return `
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group">
+              <div class="mb-6 flex justify-center">
+                ${displayImage ? `
+                  <img
+                    src="${displayImage}"
+                    alt="${member.name}"
+                    class="w-32 h-32 rounded-full object-cover border-4 border-blue-50 shadow-lg"
+                  />
+                ` : `
+                  <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full flex items-center justify-center text-white font-black text-3xl shadow-lg">
+                    ${initials}
+                  </div>
+                `}
+              </div>
+
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-900 mb-2">${member.name}</h3>
+                ${displayTitle ? `
+                  <p class="text-sm text-blue-600 font-black tracking-[0.2em] uppercase">
+                    ${displayTitle}
+                  </p>
+                ` : ''}
+              </div>
+
+              <div class="flex flex-wrap justify-center gap-2 mb-6 min-h-[40px]">
+                ${links.length > 0 ? links.map(link => `
+                  <a
+                    href="${link.url}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-bold text-slate-600 hover:bg-slate-100 hover:border-slate-200 transition-all shadow-sm"
+                  >
+                    <svg class="w-2.5 h-2.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    ${link.label || 'Lien'}
+                  </a>
+                `).join('') : `
+                  <span class="text-[10px] text-slate-300 font-medium uppercase tracking-widest self-center">Aucun lien</span>
+                `}
+              </div>
+
+              ${member.cv ? `
+                <div class="mt-auto pt-6 border-t border-slate-50 relative">
+                  <div class="cv-content prose prose-slate max-w-none text-slate-600 text-sm leading-relaxed line-clamp-3 transition-all duration-500 overflow-hidden">
+                    ${member.cv}
+                  </div>
+                  <button 
+                    class="cv-toggle-btn mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 hover:text-emerald-600 transition-colors flex items-center gap-1"
+                  >
+                    <span>Voir plus</span>
+                    <svg class="w-3 h-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+    }).join('')}
+      </div>
+    `;
+
+    // Add toggle functionality
+    container.querySelectorAll('.cv-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.previousElementSibling;
+        const icon = btn.querySelector('svg');
+        const text = btn.querySelector('span');
+
+        if (content.classList.contains('line-clamp-3')) {
+          content.classList.remove('line-clamp-3');
+          text.textContent = 'Voir moins';
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          content.classList.add('line-clamp-3');
+          text.textContent = 'Voir plus';
+          icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+  } catch (err) {
+    console.error("Error loading comitards:", err.message);
+  }
+};

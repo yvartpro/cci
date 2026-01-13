@@ -111,6 +111,23 @@
         </div>
     </section>
 
+    <!-- Team / Comitards -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 relative">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">Notre Équipe Directrice</h2>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div id="comitard-list">
+                <!-- Loading state -->
+                <div class="flex justify-center py-20">
+                    <div class="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Our Story -->
     <section class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-6">
@@ -195,13 +212,14 @@
     <div id="footer"></div>
 
     <script type="module">
-        import { loadComponent, initMobileMenu } from './component/script.js';
+        import { loadComponent, initMobileMenu, loadComitards } from './component/script.js';
 
         // Initialize
         const init = async () => {
             await Promise.all([
                 loadComponent("#header", "./header.html"),
-                loadComponent("#footer", "./footer.html")
+                loadComponent("#footer", "./footer.html"),
+                loadComitards("#comitard-list")
             ]);
 
             initMobileMenu();
