@@ -79,13 +79,13 @@ app.post('/api/upload', upload.array('files'), async (req, res) => {
       const ext = path.extname(f.filename).toLowerCase()
 
       if (isImage(f.mimetype)) {
-        const outName = `opt_${path.basename(f.filename, ext)}.jpg`
+        const outName = `opt_${path.basename(f.filename, ext)}.webp`
         const outPath = path.join(UPLOADS_DIR, outName)
 
         try {
           await sharp(originalPath)
             .resize({ width: 1920, withoutEnlargement: true })
-            .jpeg({ quality: 75, mozjpeg: true })
+            .webp({ quality: 75 })
             .toFile(outPath)
 
           fs.unlinkSync(originalPath)

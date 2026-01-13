@@ -54,12 +54,12 @@ router.post('/', upload.array('files'), async (req, res) => {
       let finalName = file.filename
       let optimized = false
       if (isImage(file.mimetype)) {
-        const outName = `opt_${path.basename(file.filename, ext)}.jpg`
+        const outName = `opt_${path.basename(file.filename, ext)}.webp`
         const outPath = path.join(UPLOADS_DIR, outName)
         try {
           await sharp(originalPath)
             .resize({ width: 1920, withoutEnlargement: true })
-            .jpeg({ quality: 75, mozjpeg: true })
+            .webp({ quality: 75 })
             .toFile(outPath)
           try { fs.unlinkSync(originalPath) } catch (e) { }
           finalName = outName
