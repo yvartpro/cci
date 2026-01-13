@@ -24,3 +24,9 @@ export const getRelatedPosts = (currentId, limit = 4) => {
 export const getAllPosts = () => {
     return posts;
 };
+
+export const getFiles = async () => {
+    const resp = await fetch('https://capbio.bi/cci/api/files');
+    const data = await resp.json();
+    return data;
+}

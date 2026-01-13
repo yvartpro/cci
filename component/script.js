@@ -333,3 +333,5 @@ export const initCarouselSlider = (config = {}) => {
   updateSlider();
   startAutoPlay();
 };
+
+

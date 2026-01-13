@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
     mime: { type: DataTypes.STRING },
     size: { type: DataTypes.INTEGER },
     url: { type: DataTypes.STRING },
+    use_as: { type: DataTypes.ENUM('hero', 'presentation', 'volunteer', 'social', 'lastar', 'invest') },
     optimized: { type: DataTypes.BOOLEAN, defaultValue: false }
   }, {
     tableName: 'files',

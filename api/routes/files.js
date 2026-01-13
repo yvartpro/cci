@@ -61,7 +61,7 @@ router.post('/', upload.array('files'), async (req, res) => {
             .resize({ width: 1920, withoutEnlargement: true })
             .jpeg({ quality: 75, mozjpeg: true })
             .toFile(outPath)
-          try { fs.unlinkSync(originalPath) } catch (e) {}
+          try { fs.unlinkSync(originalPath) } catch (e) { }
           finalName = outName
           optimized = true
         } catch (e) {
@@ -74,7 +74,7 @@ router.post('/', upload.array('files'), async (req, res) => {
     }
     res.status(201).json({ files: created })
   } catch (err) {
-    res.status(500).json({ error: normalizeSequelizeError(err) } )
+    res.status(500).json({ error: normalizeSequelizeError(err) })
   }
 })
 
@@ -86,13 +86,32 @@ router.delete('/:id', async (req, res) => {
     // attempt to delete file from disk
     const filename = rec.filename
     if (filename) {
-      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) {}
+      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) { }
     }
     await rec.destroy()
     res.json({ deleted: true })
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: err.message })
+  }
+})
+
+// Patch file record (update metadata like use_as)
+router.patch('/:id', async (req, res) => {
+  try {
+    const rec = await FileModel.findByPk(req.params.id)
+    if (!rec) return res.status(404).json({ error: 'Not found' })
+
+    const { use_as } = req.body
+    if (use_as !== undefined) {
+      rec.use_as = use_as
+    }
+
+    await rec.save()
+    res.json(rec)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: normalizeSequelizeError(err) })
   }
 })
 
