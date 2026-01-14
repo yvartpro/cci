@@ -54,8 +54,7 @@
         <section
             class="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-emerald-900">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1920&q=80"
-                    alt="Activities" class="w-full h-full object-cover opacity-20">
+                <img id="activities-image" alt="" class="w-full h-full object-cover opacity-20">
             </div>
 
             <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
@@ -322,6 +321,8 @@
         <!-- Footer -->
         <div id="footer"></div>
     </main>
+
+    <script type="module" src="./route.js"></script>
 
     <script type="module">
         import { loadComponent, initMobileMenu } from './component/script.js';
