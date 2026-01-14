@@ -47,273 +47,282 @@
     </style>
 </head>
 
-<body class="bg-slate-50">
-    <!-- Header -->
-    <div id="header"></div>
 
-    <!-- Hero Section -->
-    <section
-        class="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900">
-        <div class="absolute inset-0 z-0">
-            <img id="invest-image" alt="CCI Invest" class="w-full h-full object-cover opacity-20">
-        </div>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100">
+    <header id="header" class="sticky top-0 z-50"></header>
+    <main>
+        <section
+            class="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-amber-900 via-amber-800 to-amber-900">
+            <div class="absolute inset-0 z-0">
+                <img id="invest-image" alt="CCI Invest" class="w-full h-full object-cover opacity-20">
+            </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+                <div class="max-w-3xl">
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-white font-bold text-sm uppercase tracking-widest">Programme
+                            Entrepreneuriat</span>
                     </div>
-                    <span class="text-white font-bold text-sm uppercase tracking-widest">Programme
-                        Entrepreneuriat</span>
+                    <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+                        CCI-Invest
+                    </h1>
+                    <p class="text-xl md:text-2xl text-amber-100 mb-8 font-medium leading-relaxed">
+                        Entrepreneuriat et développement économique durable pour une communauté prospère
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#services"
+                            class="px-8 py-4 bg-white text-amber-900 font-black rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                            Nos Services
+                        </a>
+                        <a href="contact"
+                            class="px-8 py-4 bg-transparent border-2 border-white text-white font-black rounded-2xl hover:bg-white hover:text-amber-900 transition-all uppercase tracking-widest text-sm">
+                            Démarrer un Projet
+                        </a>
+                    </div>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    CCI-Invest
-                </h1>
-                <p class="text-xl md:text-2xl text-amber-100 mb-8 font-medium leading-relaxed">
-                    Entrepreneuriat et développement économique durable pour une communauté prospère
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Notre Vision Économique</h2>
+                    <div class="h-1.5 w-20 bg-amber-600 mx-auto mb-8 rounded-full"></div>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-6">
+                        CCI-Invest est notre bras entrepreneurial dédié au développement économique durable de Rumonge.
+                        Nous croyons que l'entrepreneuriat est un moteur puissant de transformation sociale et
+                        économique.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        À travers l'accompagnement, le financement et la formation, nous aidons les entrepreneurs locaux
+                        à créer des entreprises viables qui génèrent des emplois et contribuent au développement de la
+                        communauté.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900">Nos Services</h2>
+                    <div class="h-1.5 w-20 bg-amber-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Plan d'Affaires</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Accompagnement dans l'élaboration de plans d'affaires solides et réalistes pour maximiser
+                            vos chances de succès.
+                        </p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Microfinance</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Accès à des microcrédits adaptés aux besoins des petits entrepreneurs avec des conditions
+                            flexibles et avantageuses.
+                        </p>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Incubation</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Programme d'incubation de 6 mois avec espace de travail, mentorat et accès à un réseau
+                            d'entrepreneurs.
+                        </p>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Formation Gestion</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Ateliers pratiques sur la gestion financière, le marketing, les ressources humaines et
+                            la comptabilité.
+                        </p>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Networking</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Accès à un réseau d'entrepreneurs, investisseurs et partenaires pour développer votre
+                            activité.
+                        </p>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Suivi & Évaluation</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Accompagnement continu avec suivi régulier de la performance et ajustement des stratégies
+                            si nécessaire.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sectors -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900">Secteurs d'Intervention</h2>
+                    <div class="h-1.5 w-20 bg-amber-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-amber-50 transition-all">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-black text-slate-900">Commerce</h3>
+                    </div>
+
+                    <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-emerald-50 transition-all">
+                        <div
+                            class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-black text-slate-900">Agriculture</h3>
+                    </div>
+
+                    <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-blue-50 transition-all">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-black text-slate-900">Technologie</h3>
+                    </div>
+
+                    <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-purple-50 transition-all">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-black text-slate-900">Artisanat</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Stats -->
+        <section class="py-24 bg-gradient-to-br from-amber-900 to-amber-800">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Impact CCI-Invest</h2>
+                    <p class="text-xl text-amber-100">Créer des opportunités économiques durables</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">40+</div>
+                        <div class="text-amber-200 font-medium">Entreprises Accompagnées</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">120+</div>
+                        <div class="text-amber-200 font-medium">Emplois Créés</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">$50K+</div>
+                        <div class="text-amber-200 font-medium">Financements Octroyés</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">85%</div>
+                        <div class="text-amber-200 font-medium">Taux de Réussite</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-black text-slate-900 mb-6">Lancez Votre Projet</h2>
+                <p class="text-xl text-slate-600 mb-8">
+                    Transformez votre idée en une entreprise prospère avec l'accompagnement de CCI-Invest
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#services"
-                        class="px-8 py-4 bg-white text-amber-900 font-black rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                        Nos Services
-                    </a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="contact"
-                        class="px-8 py-4 bg-transparent border-2 border-white text-white font-black rounded-2xl hover:bg-white hover:text-amber-900 transition-all uppercase tracking-widest text-sm">
-                        Démarrer un Projet
+                        class="px-8 py-4 bg-amber-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Démarrer Maintenant
+                    </a>
+                    <a href="volontaires"
+                        class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Devenir Mentor
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Mission -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Notre Vision Économique</h2>
-                <div class="h-1.5 w-20 bg-amber-600 mx-auto mb-8 rounded-full"></div>
-                <p class="text-xl text-slate-600 leading-relaxed mb-6">
-                    CCI-Invest est notre bras entrepreneurial dédié au développement économique durable de Rumonge.
-                    Nous croyons que l'entrepreneuriat est un moteur puissant de transformation sociale et économique.
-                </p>
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    À travers l'accompagnement, le financement et la formation, nous aidons les entrepreneurs locaux
-                    à créer des entreprises viables qui génèrent des emplois et contribuent au développement de la
-                    communauté.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-slate-900">Nos Services</h2>
-                <div class="h-1.5 w-20 bg-amber-600 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Plan d'Affaires</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Accompagnement dans l'élaboration de plans d'affaires solides et réalistes pour maximiser
-                        vos chances de succès.
-                    </p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Microfinance</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Accès à des microcrédits adaptés aux besoins des petits entrepreneurs avec des conditions
-                        flexibles et avantageuses.
-                    </p>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Incubation</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Programme d'incubation de 6 mois avec espace de travail, mentorat et accès à un réseau
-                        d'entrepreneurs.
-                    </p>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Formation Gestion</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Ateliers pratiques sur la gestion financière, le marketing, les ressources humaines et
-                        la comptabilité.
-                    </p>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Networking</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Accès à un réseau d'entrepreneurs, investisseurs et partenaires pour développer votre
-                        activité.
-                    </p>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Suivi & Évaluation</h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Accompagnement continu avec suivi régulier de la performance et ajustement des stratégies
-                        si nécessaire.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sectors -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-slate-900">Secteurs d'Intervention</h2>
-                <div class="h-1.5 w-20 bg-amber-600 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-amber-50 transition-all">
-                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-black text-slate-900">Commerce</h3>
-                </div>
-
-                <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-emerald-50 transition-all">
-                    <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-black text-slate-900">Agriculture</h3>
-                </div>
-
-                <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-blue-50 transition-all">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-black text-slate-900">Technologie</h3>
-                </div>
-
-                <div class="text-center p-8 bg-slate-50 rounded-2xl hover:bg-purple-50 transition-all">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-black text-slate-900">Artisanat</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Stats -->
-    <section class="py-24 bg-gradient-to-br from-amber-900 to-amber-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-white mb-4">Impact CCI-Invest</h2>
-                <p class="text-xl text-amber-100">Créer des opportunités économiques durables</p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">40+</div>
-                    <div class="text-amber-200 font-medium">Entreprises Accompagnées</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">120+</div>
-                    <div class="text-amber-200 font-medium">Emplois Créés</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">$50K+</div>
-                    <div class="text-amber-200 font-medium">Financements Octroyés</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">85%</div>
-                    <div class="text-amber-200 font-medium">Taux de Réussite</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-24 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-black text-slate-900 mb-6">Lancez Votre Projet</h2>
-            <p class="text-xl text-slate-600 mb-8">
-                Transformez votre idée en une entreprise prospère avec l'accompagnement de CCI-Invest
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="contact"
-                    class="px-8 py-4 bg-amber-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Démarrer Maintenant
-                </a>
-                <a href="volontaires"
-                    class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Devenir Mentor
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <div id="footer"></div>
+        <!-- Footer -->
+        <div id="footer"></div>
+    </main>
 
     <script type="module" src="./route.js"></script>
 </body>

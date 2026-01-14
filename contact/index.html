@@ -47,191 +47,191 @@
     </style>
 </head>
 
-<body class="bg-slate-50">
-    <!-- Header -->
-    <div id="header"></div>
 
-    <!-- Hero Section -->
-    <section
-        class="relative min-h-[50vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-emerald-900 to-blue-900">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80"
-                alt="Contact" class="w-full h-full object-cover opacity-20">
-        </div>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100">
+    <header id="header" class="sticky top-0 z-50"></header>
+    <main>
+        <section
+            class="relative min-h-[50vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-emerald-900 to-blue-900">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80"
+                    alt="Contact" class="w-full h-full object-cover opacity-20">
+            </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
-            <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
-                Contactez-Nous
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto font-medium">
-                Nous sommes là pour répondre à toutes vos questions
-            </p>
-        </div>
-    </section>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+                    Contactez-Nous
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto font-medium">
+                    Nous sommes là pour répondre à toutes vos questions
+                </p>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Contact Form -->
-                <div>
-                    <h2 class="text-3xl font-black text-slate-900 mb-8">Envoyez-nous un Message</h2>
-                    <form class="space-y-6">
-                        <div class="grid sm:grid-cols-2 gap-6">
+        <!-- Contact Section -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <!-- Contact Form -->
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900 mb-8">Envoyez-nous un Message</h2>
+                        <form class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Nom</label>
+                                    <input type="text" required
+                                        class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Prénom</label>
+                                    <input type="text" required
+                                        class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
+                                </div>
+                            </div>
+
                             <div>
                                 <label
-                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Nom</label>
-                                <input type="text" required
+                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Email</label>
+                                <input type="email" required
                                     class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
                             </div>
+
                             <div>
                                 <label
-                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Prénom</label>
-                                <input type="text" required
+                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Téléphone</label>
+                                <input type="tel"
                                     class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Sujet</label>
+                                <select
+                                    class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
+                                    <option>Volontariat</option>
+                                    <option>Partenariat</option>
+                                    <option>Don</option>
+                                    <option>Information Générale</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Message</label>
+                                <textarea rows="6" required
+                                    class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                                Envoyer le Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900 mb-8">Informations de Contact</h2>
+
+                        <div class="space-y-8 mb-12">
+                            <!-- Address -->
+                            <div class="flex items-start">
+                                <div
+                                    class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-7 h-7 text-blue-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div class="ml-6">
+                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Adresse</h3>
+                                    <p class="text-slate-600">Rumonge, Burundi<br>RN3</p>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start">
+                                <div
+                                    class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-7 h-7 text-emerald-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="ml-6">
+                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Email</h3>
+                                    <a href="mailto:cciburundi@gmail.com"
+                                        class="text-blue-600 hover:text-blue-700 font-medium">cciburundi@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <!-- Social Media -->
+                            <div class="flex items-start">
+                                <div
+                                    class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-7 h-7 text-purple-700" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                    </svg>
+                                </div>
+                                <div class="ml-6">
+                                    <h3 class="text-lg font-bold text-slate-900 mb-2">Réseaux Sociaux</h3>
+                                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Facebook</a>
+                                </div>
                             </div>
                         </div>
 
-                        <div>
-                            <label
-                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Email</label>
-                            <input type="email" required
-                                class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
-                        </div>
-
-                        <div>
-                            <label
-                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Téléphone</label>
-                            <input type="tel"
-                                class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
-                        </div>
-
-                        <div>
-                            <label
-                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Sujet</label>
-                            <select
-                                class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors">
-                                <option>Volontariat</option>
-                                <option>Partenariat</option>
-                                <option>Don</option>
-                                <option>Information Générale</option>
-                                <option>Autre</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label
-                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Message</label>
-                            <textarea rows="6" required
-                                class="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-600 focus:outline-none transition-colors resize-none"></textarea>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                            Envoyer le Message
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Contact Info -->
-                <div>
-                    <h2 class="text-3xl font-black text-slate-900 mb-8">Informations de Contact</h2>
-
-                    <div class="space-y-8 mb-12">
-                        <!-- Address -->
-                        <div class="flex items-start">
-                            <div
-                                class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-blue-700" fill="none" stroke="currentColor"
+                        <!-- Map Placeholder -->
+                        <div
+                            class="bg-slate-200 rounded-3xl h-80 flex items-center justify-center border-2 border-slate-300">
+                            <div class="text-center">
+                                <svg class="w-16 h-16 text-slate-400 mx-auto mb-4" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
+                                <p class="text-slate-500 font-medium">Carte de Localisation</p>
+                                <p class="text-sm text-slate-400 mt-2">Rumonge, Burundi</p>
                             </div>
-                            <div class="ml-6">
-                                <h3 class="text-lg font-bold text-slate-900 mb-2">Adresse</h3>
-                                <p class="text-slate-600">Rumonge, Burundi<br>RN3</p>
-                            </div>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="flex items-start">
-                            <div
-                                class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-emerald-700" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-                            <div class="ml-6">
-                                <h3 class="text-lg font-bold text-slate-900 mb-2">Email</h3>
-                                <a href="mailto:cciburundi@gmail.com"
-                                    class="text-blue-600 hover:text-blue-700 font-medium">cciburundi@gmail.com</a>
-                            </div>
-                        </div>
-
-                        <!-- Social Media -->
-                        <div class="flex items-start">
-                            <div
-                                class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-purple-700" fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                                </svg>
-                            </div>
-                            <div class="ml-6">
-                                <h3 class="text-lg font-bold text-slate-900 mb-2">Réseaux Sociaux</h3>
-                                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Facebook</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Map Placeholder -->
-                    <div
-                        class="bg-slate-200 rounded-3xl h-80 flex items-center justify-center border-2 border-slate-300">
-                        <div class="text-center">
-                            <svg class="w-16 h-16 text-slate-400 mx-auto mb-4" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <p class="text-slate-500 font-medium">Carte de Localisation</p>
-                            <p class="text-sm text-slate-400 mt-2">Rumonge, Burundi</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA -->
-    <section class="py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-black text-slate-900 mb-6">Visitez-Nous</h2>
-            <p class="text-xl text-slate-600 mb-8">
-                Vous êtes les bienvenus à notre centre communautaire à Rumonge. Venez découvrir nos activités et
-                rencontrer notre équipe.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="volontaires"
-                    class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Devenir Volontaire
-                </a>
-                <a href="activites"
-                    class="px-8 py-4 bg-emerald-600 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Nos Activités
-                </a>
+        <!-- CTA -->
+        <section class="py-24 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-black text-slate-900 mb-6">Visitez-Nous</h2>
+                <p class="text-xl text-slate-600 mb-8">
+                    Vous êtes les bienvenus à notre centre communautaire à Rumonge. Venez découvrir nos activités et
+                    rencontrer notre équipe.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="volontaires"
+                        class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Devenir Volontaire
+                    </a>
+                    <a href="activites"
+                        class="px-8 py-4 bg-emerald-600 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Nos Activités
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <div id="footer"></div>
+        <!-- Footer -->
+        <div id="footer"></div>
+    </main>
 
     <script type="module">
         import { loadComponent, initMobileMenu } from './component/script.js';

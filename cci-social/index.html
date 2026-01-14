@@ -47,290 +47,295 @@
     </style>
 </head>
 
-<body class="bg-slate-50">
-    <!-- Header -->
-    <div id="header"></div>
 
-    <!-- Hero Section -->
-    <section
-        class="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
-        <div class="absolute inset-0 z-0">
-            <img id="social_image" alt="CCI Social" class="w-full h-full object-cover opacity-20">
-        </div>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100">
+    <header id="header" class="sticky top-0 z-50"></header>
+    <main>
+        <section
+            class="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+            <div class="absolute inset-0 z-0">
+                <img id="social_image" alt="CCI Social" class="w-full h-full object-cover opacity-20">
+            </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+                <div class="max-w-3xl">
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-white font-bold text-sm uppercase tracking-widest">Programme Social</span>
                     </div>
-                    <span class="text-white font-bold text-sm uppercase tracking-widest">Programme Social</span>
+                    <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+                        CCI-Social
+                    </h1>
+                    <p class="text-xl md:text-2xl text-blue-100 mb-8 font-medium leading-relaxed">
+                        Éducation et autonomisation des communautés vulnérables pour un développement durable
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#programmes"
+                            class="px-8 py-4 bg-white text-blue-900 font-black rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                            Nos Programmes
+                        </a>
+                        <a href="contact"
+                            class="px-8 py-4 bg-transparent border-2 border-white text-white font-black rounded-2xl hover:bg-white hover:text-blue-900 transition-all uppercase tracking-widest text-sm">
+                            Nous Soutenir
+                        </a>
+                    </div>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
-                    CCI-Social
-                </h1>
-                <p class="text-xl md:text-2xl text-blue-100 mb-8 font-medium leading-relaxed">
-                    Éducation et autonomisation des communautés vulnérables pour un développement durable
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Notre Mission Sociale</h2>
+                    <div class="h-1.5 w-20 bg-blue-600 mx-auto mb-8 rounded-full"></div>
+                    <p class="text-xl text-slate-600 leading-relaxed">
+                        CCI-Social vise à transformer les vies des communautés vulnérables à travers l'éducation,
+                        la formation professionnelle et l'autonomisation économique. Nous croyons que chaque individu
+                        mérite l'opportunité de réaliser son potentiel.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs -->
+        <section id="programmes" class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900">Nos Programmes</h2>
+                    <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Program 1 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Éducation pour Tous</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Bourses scolaires, matériel éducatif et tutorat pour plus de 150 enfants vulnérables.
+                            Nous garantissons l'accès à une éducation de qualité pour tous.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Bourses scolaires complètes</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Tutorat et accompagnement</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Suivi personnalisé</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Program 2 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Atelier Couture</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Formation professionnelle en couture pour l'autonomisation économique des femmes.
+                            Un programme complet de 6 mois avec accompagnement entrepreneurial.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Formation technique complète</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Équipement fourni</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Kit de démarrage</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Program 3 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Projet TAXEL</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Initiative environnementale de reboisement et de protection de l'écosystème.
+                            Plus de 10,000 arbres plantés pour un avenir durable.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Campagnes de reboisement</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Sensibilisation environnementale</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Protection des sources d'eau</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Program 4 -->
+                    <div
+                        class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4">Soutien Psychosocial</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Accompagnement psychosocial pour les familles vulnérables.
+                            Nous offrons un soutien holistique pour le bien-être de la communauté.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Counseling familial</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Groupes de soutien</span>
+                            </li>
+                            <li class="flex items-start text-slate-700">
+                                <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Suivi communautaire</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Stats -->
+        <section class="py-24 bg-gradient-to-br from-blue-900 to-blue-800">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-white mb-4">Notre Impact</h2>
+                    <p class="text-xl text-blue-100">Des résultats concrets qui changent des vies</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">150+</div>
+                        <div class="text-blue-200 font-medium">Enfants Scolarisés</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">50+</div>
+                        <div class="text-blue-200 font-medium">Femmes Formées</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">10K+</div>
+                        <div class="text-blue-200 font-medium">Arbres Plantés</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-black text-white mb-2">500+</div>
+                        <div class="text-blue-200 font-medium">Bénéficiaires Directs</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-black text-slate-900 mb-6">Rejoignez Notre Mission</h2>
+                <p class="text-xl text-slate-600 mb-8">
+                    Ensemble, nous pouvons créer un impact durable dans la vie des communautés vulnérables
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#programmes"
-                        class="px-8 py-4 bg-white text-blue-900 font-black rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                        Nos Programmes
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="volontaires"
+                        class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Devenir Volontaire
                     </a>
                     <a href="contact"
-                        class="px-8 py-4 bg-transparent border-2 border-white text-white font-black rounded-2xl hover:bg-white hover:text-blue-900 transition-all uppercase tracking-widest text-sm">
-                        Nous Soutenir
+                        class="px-8 py-4 bg-emerald-600 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
+                        Faire un Don
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Mission -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Notre Mission Sociale</h2>
-                <div class="h-1.5 w-20 bg-blue-600 mx-auto mb-8 rounded-full"></div>
-                <p class="text-xl text-slate-600 leading-relaxed">
-                    CCI-Social vise à transformer les vies des communautés vulnérables à travers l'éducation,
-                    la formation professionnelle et l'autonomisation économique. Nous croyons que chaque individu
-                    mérite l'opportunité de réaliser son potentiel.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Programs -->
-    <section id="programmes" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-slate-900">Nos Programmes</h2>
-                <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Program 1 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Éducation pour Tous</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Bourses scolaires, matériel éducatif et tutorat pour plus de 150 enfants vulnérables.
-                        Nous garantissons l'accès à une éducation de qualité pour tous.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Bourses scolaires complètes</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Tutorat et accompagnement</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Suivi personnalisé</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Program 2 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Atelier Couture</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Formation professionnelle en couture pour l'autonomisation économique des femmes.
-                        Un programme complet de 6 mois avec accompagnement entrepreneurial.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Formation technique complète</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Équipement fourni</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Kit de démarrage</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Program 3 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Projet TAXEL</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Initiative environnementale de reboisement et de protection de l'écosystème.
-                        Plus de 10,000 arbres plantés pour un avenir durable.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Campagnes de reboisement</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Sensibilisation environnementale</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-emerald-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Protection des sources d'eau</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Program 4 -->
-                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-black text-slate-900 mb-4">Soutien Psychosocial</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Accompagnement psychosocial pour les familles vulnérables.
-                        Nous offrons un soutien holistique pour le bien-être de la communauté.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Counseling familial</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Groupes de soutien</span>
-                        </li>
-                        <li class="flex items-start text-slate-700">
-                            <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Suivi communautaire</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Stats -->
-    <section class="py-24 bg-gradient-to-br from-blue-900 to-blue-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold text-white mb-4">Notre Impact</h2>
-                <p class="text-xl text-blue-100">Des résultats concrets qui changent des vies</p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">150+</div>
-                    <div class="text-blue-200 font-medium">Enfants Scolarisés</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">50+</div>
-                    <div class="text-blue-200 font-medium">Femmes Formées</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">10K+</div>
-                    <div class="text-blue-200 font-medium">Arbres Plantés</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black text-white mb-2">500+</div>
-                    <div class="text-blue-200 font-medium">Bénéficiaires Directs</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-24 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-black text-slate-900 mb-6">Rejoignez Notre Mission</h2>
-            <p class="text-xl text-slate-600 mb-8">
-                Ensemble, nous pouvons créer un impact durable dans la vie des communautés vulnérables
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="volontaires"
-                    class="px-8 py-4 bg-blue-700 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Devenir Volontaire
-                </a>
-                <a href="contact"
-                    class="px-8 py-4 bg-emerald-600 text-white font-black rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-105 uppercase tracking-widest text-sm">
-                    Faire un Don
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <div id="footer"></div>
+        <!-- Footer -->
+        <div id="footer"></div>
+    </main>
 
     <script type="module" src="./route.js"></script>
 </body>
