@@ -309,39 +309,39 @@
           const links = Array.isArray(parsedLinks) ? parsedLinks : [];
 
           return `
-                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
-                            <!-- Image or Initials -->
-                            <div class="mb-6">
-                                ${volunteer.image?.url
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
+                <!-- Image or Initials -->
+                <div class="mb-6">
+                  ${volunteer.image?.url
               ? `<img src="${volunteer.image?.url}" alt="${volunteer.name}" class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-emerald-100">`
               : `<div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white font-black text-2xl mx-auto">${initials}</div>`
             }
-                            </div>
+                </div>
 
-                            <!-- Name and Role -->
-                            <div class="text-center mb-4">
-                                <h3 class="text-xl font-bold text-slate-900 mb-1">${volunteer.name}</h3>
-                                ${volunteer.role ? `<p class="text-sm text-slate-500">${volunteer.role}</p>` : ''}
-                            </div>
+                <!-- Name and Role -->
+                <div class="text-center mb-4">
+                  <h3 class="text-xl font-bold text-slate-900 mb-1">${volunteer.name}</h3>
+                  ${volunteer.role ? `<p class="text-sm text-slate-500">${volunteer.role}</p>` : ''}
+                </div>
 
-                            <!-- Category Badge -->
-                            ${volunteer.category
+                <!-- Category Badge -->
+                ${volunteer.category
               ? `<div class="flex justify-center mb-4">
-                                    <span class="px-3 py-1 ${categoryClass} text-xs font-black uppercase tracking-widest rounded-full">
-                                        ${volunteer.category}
-                                    </span>
-                                </div>`
+                  <span class="px-3 py-1 ${categoryClass} text-xs font-black uppercase tracking-widest rounded-full">
+                    ${volunteer.category}
+                  </span>
+                </div>`
               : ''
             }
 
-                            <!-- Bio -->
-                            ${shortBio
+                <!-- Bio -->
+                ${shortBio
               ? `<p class="text-slate-600 text-sm leading-relaxed">${shortBio}</p>`
               : ''
             }
 
-                            <!-- Testimonial -->
-                            ${volunteer.testimonial
+                <!-- Testimonial -->
+                ${volunteer.testimonial
               ? `<p class="text-slate-600 text-sm italic mt-4 pt-4 border-t border-slate-100">"${truncate(volunteer.testimonial, 120)}"</p>`
               : ''
             }
@@ -363,8 +363,8 @@
                   <span class="text-[10px] text-slate-300 font-medium uppercase tracking-widest self-center">Aucun lien</span>
                 `}
               </div>
-                        </div>
-                    `;
+            </div>
+          `;
         }).join('');
 
         gridEl.classList.remove('hidden');
