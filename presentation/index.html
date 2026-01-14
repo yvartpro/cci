@@ -51,11 +51,11 @@
     <header id="header" class="sticky top-0 z-50"></header>
     <main>
         <section
-            class="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-emerald-900">
+            class="relative min-h-[50vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-900 via-emerald-900 to-blue-900">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1559027615-cd26736f5df4?auto=format&fit=crop&w=1920&q=80"
-                    alt="CCI Community" class="w-full h-full object-cover opacity-20">
+                <img id="presentation-image" alt="" class="w-full h-full object-cover opacity-20">
             </div>
+
 
             <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 text-center">
                 <h1 class="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
@@ -219,9 +219,13 @@
 
     <script type="module">
         import { loadComponent, initMobileMenu, loadComitards } from './component/script.js';
-
+        import { files } from '/cci/route.js'
         // Initialize
         const init = async () => {
+            const presentation_image = files.find(f => f.use_as === 'presentation');
+            const presentationImage = document.getElementById("presentation-image")
+            presentationImage.src = presentation_image.url
+
             await Promise.all([
                 loadComponent("#header", "./header.html"),
                 loadComponent("#footer", "./footer.html"),

@@ -155,6 +155,7 @@ export const initMobileMenu = () => {
  * @param {number} limit - Maximum number of posts to display (default: 6)
  */
 export const loadPosts = async (selector, posts, limit = 6) => {
+  if (!selector || !posts) return;
   const postsContainer = document.querySelector(selector);
 
   if (!postsContainer) {
@@ -202,6 +203,7 @@ export const loadPosts = async (selector, posts, limit = 6) => {
  * @param {string} dotsSelector - CSS selector for the dots container
  */
 export const loadCarousel = async (innerSelector, dotsSelector) => {
+  if (!innerSelector || !dotsSelector) return;
   const inner = document.querySelector(innerSelector);
   const dotsContainer = document.querySelector(dotsSelector);
 
@@ -342,6 +344,7 @@ export const initCarouselSlider = (config = {}) => {
  * @param {Array} partners - Array of partner objects to display
  */
 export const loadPartners = async (selector, partners) => {
+  if (!selector || !partners) return;
   const container = document.querySelector(selector);
   if (!container) return;
 

@@ -53,7 +53,7 @@
     <section
       class="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-blue-900">
       <div class="absolute inset-0 z-0">
-        <img id="volontaires-image" alt="" class="w-full h-full object-cover opacity-20">
+        <img id="volunteer-image" alt="" class="w-full h-full object-cover opacity-20">
       </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 py-24">
@@ -242,9 +242,7 @@
 
   <script type="module">
     import { loadComponent, initMobileMenu } from './component/script.js';
-
-    // API Configuration
-    import { API_BASE_URL } from './route.js';
+    import { API_BASE_URL, files } from './route.js';
 
     // Category color mapping
     const categoryColors = {
@@ -357,6 +355,10 @@
 
     // Initialize
     const init = async () => {
+      const volunteer_image = files.find(f => f.use_as === 'volunteer');
+      const volunteerImage = document.getElementById("volunteer-image")
+      volunteerImage.src = volunteer_image.url
+
       await Promise.all([
         loadComponent("#header", "./header.html"),
         loadComponent("#footer", "./footer.html"),

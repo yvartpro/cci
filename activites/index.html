@@ -326,9 +326,13 @@
 
     <script type="module">
         import { loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
 
         // Initialize
         const init = async () => {
+            const activities_image = files.find(f => f.use_as === 'activities');
+            const activitiesImage = document.getElementById("activities-image");
+            activitiesImage.src = activities_image.url;
             await Promise.all([
                 loadComponent("#header", "./header.html"),
                 loadComponent("#footer", "./footer.html")

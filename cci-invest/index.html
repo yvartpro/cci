@@ -324,7 +324,24 @@
         <div id="footer"></div>
     </main>
 
-    <script type="module" src="./route.js"></script>
+    <script type="module">
+        import { loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
+
+        const init = async () => {
+            const invest_image = files.find(f => f.use_as === 'invest');
+            const investImage = document.getElementById("invest-image");
+            investImage.src = invest_image.url;
+            await Promise.all([
+                loadComponent("#header", "./header.html"),
+                loadComponent("#footer", "./footer.html")
+            ]);
+
+            initMobileMenu();
+        };
+
+        init();
+    </script>
 </body>
 
 </html>

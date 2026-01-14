@@ -335,7 +335,24 @@
         <div id="footer"></div>
     </main>
 
-    <script type="module" src="./route.js"></script>
+    <script type="module">
+        import { loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
+
+        const init = async () => {
+            const lastar_image = files.find(f => f.use_as === 'lastar');
+            const lastarImage = document.getElementById("lastar-image");
+            lastarImage.src = lastar_image.url;
+            await Promise.all([
+                loadComponent("#header", "./header.html"),
+                loadComponent("#footer", "./footer.html")
+            ]);
+
+            initMobileMenu();
+        };
+
+        init();
+    </script>
 </body>
 
 </html>

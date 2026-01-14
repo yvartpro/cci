@@ -105,8 +105,12 @@
         import { posts as allPosts } from './data/posts-data.js';
         import { formatDate } from './utils.js';
         import { loadPosts, loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
 
         const init = async () => {
+            const news_image = files.find(f => f.use_as === 'news');
+            const newsImage = document.getElementById("news-image");
+            newsImage.src = news_image.url;
             await Promise.all([
                 loadComponent("#header", "./header.html"),
                 loadComponent("#footer", "./footer.html")

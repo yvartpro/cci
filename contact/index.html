@@ -234,9 +234,12 @@
 
     <script type="module">
         import { loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
 
-        // Initialize
         const init = async () => {
+            const contact_image = files.find(f => f.use_as === 'contact');
+            const contactImage = document.getElementById("contact-image");
+            contactImage.src = contact_image.url;
             await Promise.all([
                 loadComponent("#header", "./header.html"),
                 loadComponent("#footer", "./footer.html")

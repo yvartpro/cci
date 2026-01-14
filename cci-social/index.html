@@ -327,8 +327,24 @@
 
         <div id="footer"></div>
     </main>
+    <script type="module">
+        import { loadComponent, initMobileMenu } from './component/script.js';
+        import { files } from '/cci/route.js'
 
-    <script type="module" src="./route.js"></script>
+        const init = async () => {
+            const social_image = files.find(f => f.use_as === 'social');
+            const socialImage = document.getElementById("social-image");
+            socialImage.src = social_image.url;
+            await Promise.all([
+                loadComponent("#header", "./header.html"),
+                loadComponent("#footer", "./footer.html")
+            ]);
+
+            initMobileMenu();
+        };
+
+        init();
+    </script>
 </body>
 
 </html>
