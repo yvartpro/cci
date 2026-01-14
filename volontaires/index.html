@@ -303,12 +303,17 @@
           const bioText = stripHtml(volunteer.bio || '');
           const shortBio = truncate(bioText);
 
+          const parsedLinks = (typeof volunteer.links === 'string')
+            ? JSON.parse(volunteer.links)
+            : volunteer.links;
+          const links = Array.isArray(parsedLinks) ? parsedLinks : [];
+
           return `
                         <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl transition-all">
                             <!-- Image or Initials -->
                             <div class="mb-6">
-                                ${volunteer.image_url
-              ? `<img src="${volunteer.image_url}" alt="${volunteer.name}" class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-emerald-100">`
+                                ${volunteer.image?.url
+              ? `<img src="${volunteer.image?.url}" alt="${volunteer.name}" class="w-24 h-24 rounded-full object-cover mx-auto border-4 border-emerald-100">`
               : `<div class="w-24 h-24 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full flex items-center justify-center text-white font-black text-2xl mx-auto">${initials}</div>`
             }
                             </div>
@@ -340,6 +345,24 @@
               ? `<p class="text-slate-600 text-sm italic mt-4 pt-4 border-t border-slate-100">"${truncate(volunteer.testimonial, 120)}"</p>`
               : ''
             }
+
+              <div class="flex flex-wrap justify-center gap-2 mb-6 min-h-[40px]">
+                ${links.length > 0 ? links.map(link => `
+                  <a
+                    href="${link.url}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-bold text-slate-600 hover:bg-slate-100 hover:border-slate-200 transition-all shadow-sm"
+                  >
+                    <svg class="w-2.5 h-2.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    ${link.label || 'Lien'}
+                  </a>
+                `).join('') : `
+                  <span class="text-[10px] text-slate-300 font-medium uppercase tracking-widest self-center">Aucun lien</span>
+                `}
+              </div>
                         </div>
                     `;
         }).join('');
