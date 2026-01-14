@@ -426,14 +426,16 @@ export const loadComitards = async (selector) => {
         .slice(0, 2);
     };
 
-
     container.innerHTML = `
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         ${sortedData.map(member => {
       const initials = getInitials(member.name);
       const displayImage = member.image_url || member.image?.url;
       const displayTitle = member.titre?.name;
-      const links = Array.isArray(member.links) ? member.links : [];
+      const parsedLinks = (typeof member.links === 'string')
+        ? JSON.parse(member.links)
+        : member.links;
+      const links = Array.isArray(parsedLinks) ? parsedLinks : [];
 
       return `
             <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group">
