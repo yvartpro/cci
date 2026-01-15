@@ -49,7 +49,9 @@ function isImage(mimetype) {
 /* -------------------- HELPERS -------------------- */
 
 function fileUrl(req, filename) {
-  return `${req.protocol}://${req.get('host')}/cci/api/uploads/${encodeURIComponent(filename)}`
+  // Use BASE_URL from environment if available, otherwise construct from request
+  const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`
+  return `${baseUrl}/cci/api/uploads/${encodeURIComponent(filename)}`
 }
 
 

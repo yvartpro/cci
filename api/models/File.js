@@ -10,9 +10,10 @@ module.exports = (sequelize) => {
     url: {
       type: DataTypes.VIRTUAL,
       get() {
-        const baseUrl = process.env.APP_URL || 'http://127.0.0.1:3000/cci';
+        const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
         const filename = this.getDataValue('filename');
-        return filename ? `${baseUrl}/uploads/${filename}` : null;
+        // Note: index.js serves uploads at /cci/uploads
+        return filename ? `${baseUrl}/cci/uploads/${filename}` : null;
       }
     },
     use_as: { type: DataTypes.ENUM('hero', 'presentation', 'volunteer', 'social', 'lastar', 'invest', 'contact', 'news', 'activities') },

@@ -28,9 +28,9 @@ const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } })
 function isImage(mimetype) { return mimetype && mimetype.startsWith('image/') }
 
 function fileUrl(req, filename) {
-  const protocol = req.protocol
-  const host = req.get('host')
-  return `${protocol}://${host}/cci/uploads/${encodeURIComponent(filename)}`
+  // Use BASE_URL from environment if available, otherwise construct from request
+  const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`
+  return `${baseUrl}/cci/uploads/${encodeURIComponent(filename)}`
 }
 
 // List files
@@ -62,7 +62,7 @@ router.post('/', authRequired, upload.array('files'), async (req, res) => {
             .resize({ width: 1920, withoutEnlargement: true })
             .jpeg({ quality: 75, mozjpeg: true })
             .toFile(outPath)
-          try { fs.unlinkSync(originalPath) } catch (e) {}
+          try { fs.unlinkSync(originalPath) } catch (e) { }
           finalName = outName
           optimized = true
         } catch (e) {
@@ -75,12 +75,12 @@ router.post('/', authRequired, upload.array('files'), async (req, res) => {
     }
     res.status(201).json({ files: created })
   } catch (err) {
-    res.status(500).json({ error: normalizeSequelizeError(err) } )
+    res.status(500).json({ error: normalizeSequelizeError(err) })
   }
 })
 
 // Partial update using PATCH (not PUT) - merge provided fields
-router.patch('/:id', authRequired,  async (req, res) => {
+router.patch('/:id', authRequired, async (req, res) => {
   try {
     const file = await FileModel.findByPk(req.params.id)
     if (!file) return res.status(404).json({ error: 'Not found' })
@@ -101,7 +101,7 @@ router.delete('/:id', authRequired, requireRole("admin"), async (req, res) => {
     // attempt to delete file from disk
     const filename = rec.filename
     if (filename) {
-      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) {}
+      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) { }
     }
     await rec.destroy()
     res.json({ deleted: true })
