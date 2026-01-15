@@ -1,5 +1,9 @@
 const { DataTypes } = require('sequelize')
 
+/**
+ * Volunteer model for managing volunteer profiles
+ * Supports rich bio content, images, testimonials, and categorization
+ */
 module.exports = (sequelize) => {
     const Volunteer = sequelize.define('Volunteer', {
         id: { type: DataTypes.INTEGER.UNSIGNED, primaryKey: true, autoIncrement: true },
@@ -9,12 +13,18 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM('Education', 'Environment', 'Formation', 'Leadership'),
             allowNull: true
         },
-        links: { type: DataTypes.JSON, allowNull: true, defaultValue: [] },
+
+        // Rich text biography
         bio: { type: DataTypes.TEXT },
 
+        // Optional testimonial
         testimonial: { type: DataTypes.TEXT },
 
-        image_file_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
+        // Image references
+        image_url: { type: DataTypes.STRING },
+        image_file_id: { type: DataTypes.INTEGER.UNSIGNED },
+
+        // Status and visibility
         status: {
             type: DataTypes.ENUM('active', 'inactive', 'archived'),
             allowNull: false,
@@ -22,12 +32,12 @@ module.exports = (sequelize) => {
         },
         featured: { type: DataTypes.BOOLEAN, defaultValue: false },
 
+        // Custom ordering
         order: { type: DataTypes.INTEGER.UNSIGNED, defaultValue: 0 }
     }, {
         tableName: 'volunteers',
         underscored: true,
         timestamps: true,
-        paranoid: true,
     })
 
     return Volunteer

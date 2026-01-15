@@ -13,10 +13,15 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 5000
 
-// 🔒 ALWAYS resolve relative to this file (cci/api/index.js)
+// ðŸ”’ ALWAYS resolve relative to this file (cci/api/index.js)
 const UPLOADS_DIR = path.resolve(__dirname, 'uploads')
 /* -------------------- STATIC FILES -------------------- */
-app.use('/uploads', express.static(UPLOADS_DIR))      // old URLs
+app.use('/cci/uploads', express.static(UPLOADS_DIR))      // old URLs
+
+app.use("/cci", express.static(path.join(__dirname, "public")));
+app.get('/cci/api', (req, res) => {
+  res.json({ message: "CCI API running fine" })
+})
 
 // ensure uploads dir exists
 fs.mkdirSync(UPLOADS_DIR, { recursive: true })
@@ -44,7 +49,7 @@ function isImage(mimetype) {
 /* -------------------- HELPERS -------------------- */
 
 function fileUrl(req, filename) {
-  return `${req.protocol}://${req.get('host')}/api/uploads/${encodeURIComponent(filename)}`
+  return `${req.protocol}://${req.get('host')}/cci/api/uploads/${encodeURIComponent(filename)}`
 }
 
 
@@ -52,17 +57,32 @@ function fileUrl(req, filename) {
 /* -------------------- ROUTES -------------------- */
 
 const articlesRouter = require('./routes/articles')
-app.use('/api/articles', articlesRouter)
+app.use('/cci/api/articles', articlesRouter)
 
 const filesRouter = require('./routes/files')
-app.use('/api/files', filesRouter)
+app.use('/cci/api/files', filesRouter)
 
 const volunteersRouter = require('./routes/volunteers')
-app.use('/api/volunteers', volunteersRouter)
+app.use('/cci/api/volunteers', volunteersRouter)
+
+const userRouter = require('./routes/user')
+app.use('/cci/api/user', userRouter)
+
+const carouselRouter = require('./routes/carousel')
+app.use('/cci/api/carousel', carouselRouter)
+
+const partnerRouter = require('./routes/partner')
+app.use('/cci/api/partner', partnerRouter)
+
+const titrerRouter = require('./routes/titre')
+app.use('/cci/api/titre', titrerRouter)
+
+const comitardRouter = require('./routes/comitard')
+app.use('/cci/api/comitard', comitardRouter)
 
 /* -------------------- UPLOAD -------------------- */
 
-app.post('/api/upload', upload.array('files'), async (req, res) => {
+app.post('/cci/api/upload', upload.array('files'), async (req, res) => {
   try {
     if (!req.files?.length) {
       return res.status(400).json({
@@ -79,13 +99,13 @@ app.post('/api/upload', upload.array('files'), async (req, res) => {
       const ext = path.extname(f.filename).toLowerCase()
 
       if (isImage(f.mimetype)) {
-        const outName = `opt_${path.basename(f.filename, ext)}.webp`
+        const outName = `opt_${path.basename(f.filename, ext)}.jpg`
         const outPath = path.join(UPLOADS_DIR, outName)
 
         try {
           await sharp(originalPath)
             .resize({ width: 1920, withoutEnlargement: true })
-            .webp({ quality: 75 })
+            .jpeg({ quality: 75, mozjpeg: true })
             .toFile(outPath)
 
           fs.unlinkSync(originalPath)

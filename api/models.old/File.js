@@ -7,21 +7,12 @@ module.exports = (sequelize) => {
     originalname: { type: DataTypes.STRING },
     mime: { type: DataTypes.STRING },
     size: { type: DataTypes.INTEGER },
-    url: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        const baseUrl = process.env.APP_URL || 'http://127.0.0.1:3000/cci';
-        const filename = this.getDataValue('filename');
-        return filename ? `${baseUrl}/uploads/${filename}` : null;
-      }
-    },
-    use_as: { type: DataTypes.ENUM('hero', 'presentation', 'volunteer', 'social', 'lastar', 'invest', 'contact', 'news', 'activities') },
+    url: { type: DataTypes.STRING },
+    use_as: { type: DataTypes.ENUM('hero', 'presentation', 'volunteer', 'social', 'lastar', 'invest') },
     optimized: { type: DataTypes.BOOLEAN, defaultValue: false }
   }, {
     tableName: 'files',
     underscored: true,
-    timestamps: true,
-    paranoid: true,
   })
 
   return File

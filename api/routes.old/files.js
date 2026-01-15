@@ -6,7 +6,6 @@ const multer = require('multer')
 const sharp = require('sharp')
 const db = require('../models')
 const { normalizeSequelizeError } = require('../tools/helper')
-const { authRequired, requireRole } = require('../middlewares/auth')
 
 
 const FileModel = db.File
@@ -30,7 +29,7 @@ function isImage(mimetype) { return mimetype && mimetype.startsWith('image/') }
 function fileUrl(req, filename) {
   const protocol = req.protocol
   const host = req.get('host')
-  return `${protocol}://${host}/cci/uploads/${encodeURIComponent(filename)}`
+  return `${protocol}://${host}/uploads/${encodeURIComponent(filename)}`
 }
 
 // List files
@@ -45,7 +44,7 @@ router.get('/', async (req, res) => {
 })
 
 // Upload and create File records (not attached to article)
-router.post('/', authRequired, upload.array('files'), async (req, res) => {
+router.post('/', upload.array('files'), async (req, res) => {
   try {
     if (!req.files || !req.files.length) return res.status(400).json({ error: 'No files uploaded' })
     const created = []
@@ -55,14 +54,14 @@ router.post('/', authRequired, upload.array('files'), async (req, res) => {
       let finalName = file.filename
       let optimized = false
       if (isImage(file.mimetype)) {
-        const outName = `opt_${path.basename(file.filename, ext)}.jpg`
+        const outName = `opt_${path.basename(file.filename, ext)}.webp`
         const outPath = path.join(UPLOADS_DIR, outName)
         try {
           await sharp(originalPath)
             .resize({ width: 1920, withoutEnlargement: true })
-            .jpeg({ quality: 75, mozjpeg: true })
+            .webp({ quality: 75 })
             .toFile(outPath)
-          try { fs.unlinkSync(originalPath) } catch (e) {}
+          try { fs.unlinkSync(originalPath) } catch (e) { }
           finalName = outName
           optimized = true
         } catch (e) {
@@ -71,43 +70,48 @@ router.post('/', authRequired, upload.array('files'), async (req, res) => {
       }
       const url = fileUrl(req, finalName)
       const rec = await FileModel.create({ filename: finalName, originalname: file.originalname, mime: file.mimetype, size: file.size, url, optimized })
-      created.push({ id: rec.id, filename: finalName, optimized })
+      created.push({ id: rec.id, filename: finalName, url, optimized })
     }
     res.status(201).json({ files: created })
   } catch (err) {
-    res.status(500).json({ error: normalizeSequelizeError(err) } )
+    res.status(500).json({ error: normalizeSequelizeError(err) })
   }
 })
 
-// Partial update using PATCH (not PUT) - merge provided fields
-router.patch('/:id', authRequired,  async (req, res) => {
-  try {
-    const file = await FileModel.findByPk(req.params.id)
-    if (!file) return res.status(404).json({ error: 'Not found' })
-    const patch = req.body || {}
-    Object.keys(patch).forEach((key) => { file[key] = patch[key] })
-    await file.save()
-    res.json(file)
-  } catch (err) {
-    console.error(err)
-    res.status(400).json({ error: err.message })
-  }
-})
 // Delete file record (and optionally remove file)
-router.delete('/:id', authRequired, requireRole("admin"), async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const rec = await FileModel.findByPk(req.params.id)
     if (!rec) return res.status(404).json({ error: 'Not found' })
     // attempt to delete file from disk
     const filename = rec.filename
     if (filename) {
-      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) {}
+      try { fs.unlinkSync(path.join(UPLOADS_DIR, filename)) } catch (e) { }
     }
     await rec.destroy()
     res.json({ deleted: true })
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: err.message })
+  }
+})
+
+// Patch file record (update metadata like use_as)
+router.patch('/:id', async (req, res) => {
+  try {
+    const rec = await FileModel.findByPk(req.params.id)
+    if (!rec) return res.status(404).json({ error: 'Not found' })
+
+    const { use_as } = req.body
+    if (use_as !== undefined) {
+      rec.use_as = use_as
+    }
+
+    await rec.save()
+    res.json(rec)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: normalizeSequelizeError(err) })
   }
 })
 

@@ -1,36 +1,44 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
+const fs = require('fs')
+const multer = require('multer')
+const sharp = require('sharp')
 const db = require('../models')
 const blocksSvc = require('../services/articleBlocks')
-const fileResolver = require('../services/fileResolver')
-const { authRequired, requireRole } = require('../middlewares/auth')
-
 
 const Article = db.Article
-const File = db.File
+const FileModel = db.File
+
+// uploads dir (same as index.js)
+const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, '..', 'uploads')
+fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname)
+    const ts = Date.now()
+    cb(null, `upload_${ts}_${Math.round(Math.random() * 1e6)}${ext}`)
+  }
+})
+const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } })
+
+function isImage(mimetype) {
+  return mimetype && mimetype.startsWith('image/')
+}
+
+function fileUrl(req, filename) {
+  const protocol = req.protocol
+  const host = req.get('host')
+  return `${protocol}://${host}/uploads/${encodeURIComponent(filename)}`
+}
 
 // List articles (basic)
 router.get('/', async (req, res) => {
   try {
-    const list = await Article.findAll({
-      include: [{ model: File, as: 'files', attributes: ['id', 'url'] }],
-      order: [['created_at', 'DESC']],
-      limit: 50
-    })
-
-    // Resolve hero_file_id for each article
-    const enrichedList = await Promise.all(list.map(async (article) => {
-      const articleData = article.toJSON()
-
-      // Resolve hero image
-      if (articleData.hero_file_id) {
-        articleData.hero_file = await fileResolver.resolveFileId(articleData.hero_file_id)
-      }
-
-      return articleData
-    }))
-
-    res.json(enrichedList)
+    const list = await Article.findAll({ order: [['created_at', 'DESC']], limit: 50 })
+    res.json(list)
   } catch (err) {
     console.error(err)
     res.status(500).json({ error: err.message })
@@ -38,7 +46,7 @@ router.get('/', async (req, res) => {
 })
 
 // Create article
-router.post('/', authRequired, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const payload = req.body || {}
     const article = await Article.create(payload)
@@ -52,28 +60,15 @@ router.post('/', authRequired, async (req, res) => {
 // Get single and increase views
 router.get('/:id', async (req, res) => {
   try {
-    const a = await Article.findByPk(req.params.id, {
-      include: [{ model: File, as: 'files', attributes: ['id', 'url'] }]
-    })
+    const a = await Article.findByPk(req.params.id)
     if (!a) return res.status(404).json({ error: 'Not found' })
     await a.increment('views_count')
     await a.reload()
 
-    // Ensure sections, tags, meta are parsed
     const article = a.toJSON() // get plain object
     article.sections = Array.isArray(article.sections) ? article.sections : JSON.parse(article.sections || '[]')
     article.tags = Array.isArray(article.tags) ? article.tags : JSON.parse(article.tags || '[]')
     article.meta = typeof article.meta === 'object' ? article.meta : JSON.parse(article.meta || '{}')
-
-    // Resolve hero image
-    if (article.hero_file_id) {
-      article.hero_file = await fileResolver.resolveFileId(article.hero_file_id)
-    }
-
-    // Resolve file IDs in sections
-    if (article.sections && article.sections.length > 0) {
-      article.sections = await fileResolver.resolveSectionFiles(article.sections)
-    }
 
     res.json(article)
   } catch (err) {
@@ -82,9 +77,8 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-
 // Partial update using PATCH (not PUT) - merge provided fields
-router.patch('/:id', authRequired, async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const a = await Article.findByPk(req.params.id)
     if (!a) return res.status(404).json({ error: 'Not found' })
@@ -101,7 +95,7 @@ router.patch('/:id', authRequired, async (req, res) => {
 })
 
 // Delete
-router.delete('/:id', authRequired, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const a = await Article.findByPk(req.params.id)
     if (!a) return res.status(404).json({ error: 'Not found' })
@@ -116,7 +110,7 @@ router.delete('/:id', authRequired, async (req, res) => {
 // Block operations (use PATCH for modifications)
 
 // Insert block: POST /api/articles/:id/blocks
-router.post('/:id/blocks', authRequired, async (req, res) => {
+router.post('/:id/blocks', async (req, res) => {
   try {
     const block = req.body.block || req.body
     const position = req.body.position != null ? parseInt(req.body.position, 10) : null
@@ -157,7 +151,7 @@ router.get('/:id/blocks/:blockId', async (req, res) => {
 })
 
 // Update block: PATCH /api/articles/:id/blocks/:blockId
-router.patch('/:id/blocks/:blockId', authRequired, async (req, res) => {
+router.patch('/:id/blocks/:blockId', async (req, res) => {
   try {
     const patch = req.body
     const updated = await blocksSvc.updateBlock(req.params.id, req.params.blockId, patch)
@@ -170,7 +164,7 @@ router.patch('/:id/blocks/:blockId', authRequired, async (req, res) => {
 })
 
 // Move block: PATCH /api/articles/:id/blocks/:blockId/move
-router.patch('/:id/blocks/:blockId/move', authRequired, async (req, res) => {
+router.patch('/:id/blocks/:blockId/move', async (req, res) => {
   try {
     const newIndex = parseInt(req.body.newIndex, 10)
     if (Number.isNaN(newIndex)) return res.status(400).json({ error: 'newIndex required' })
@@ -184,7 +178,7 @@ router.patch('/:id/blocks/:blockId/move', authRequired, async (req, res) => {
 })
 
 // Delete block
-router.delete('/:id/blocks/:blockId', authRequired, async (req, res) => {
+router.delete('/:id/blocks/:blockId', async (req, res) => {
   try {
     const removed = await blocksSvc.deleteBlock(req.params.id, req.params.blockId)
     const article = await Article.findByPk(req.params.id)
@@ -196,7 +190,7 @@ router.delete('/:id/blocks/:blockId', authRequired, async (req, res) => {
 })
 
 // Replace blocks: PATCH /api/articles/:id/blocks  (body: blocks: [])
-router.patch('/:id/blocks', authRequired, async (req, res) => {
+router.patch('/:id/blocks', async (req, res) => {
   try {
     const newBlocks = req.body.blocks || req.body
     const replaced = await blocksSvc.replaceBlocks(req.params.id, newBlocks)
@@ -208,95 +202,63 @@ router.patch('/:id/blocks', authRequired, async (req, res) => {
   }
 })
 
-// =====================
-// FILE ASSOCIATIONS (Pivot Table Management)
-// =====================
-
-// Add files to article: POST /api/articles/:id/files
-// Body: { fileIds: [1, 2, 3] } or { fileId: 1 }
-router.post('/:id/files', authRequired, async (req, res) => {
+// Upload files and attach to article: POST /api/articles/:id/files
+router.post('/:id/files', upload.array('files'), async (req, res) => {
   try {
     const article = await Article.findByPk(req.params.id)
     if (!article) return res.status(404).json({ error: 'Article not found' })
 
-    const { fileIds, fileId } = req.body
-    const ids = fileIds || (fileId ? [fileId] : [])
+    if (!req.files || !req.files.length) return res.status(400).json({ error: 'No files uploaded' })
 
-    if (!ids.length) {
-      return res.status(400).json({ error: 'fileIds or fileId required' })
-    }
+    const created = []
+    for (const f of req.files) {
+      const originalPath = f.path
+      const ext = path.extname(f.filename).toLowerCase()
+      let finalName = f.filename
+      let optimized = false
 
-    // Verify all files exist
-    const files = await File.findAll({ where: { id: ids } })
-    if (files.length !== ids.length) {
-      return res.status(400).json({ error: 'Some files not found' })
-    }
-
-    // Add files to article (creates records in article_files pivot table)
-    await article.addFiles(files)
-
-    // Reload with associations
-    await article.reload({ include: [{ model: File, as: 'files' }] })
-    res.json(article)
-  } catch (err) {
-    console.error(err)
-    res.status(400).json({ error: err.message })
-  }
-})
-
-// Remove files from article: DELETE /api/articles/:id/files
-// Body: { fileIds: [1, 2, 3] } or { fileId: 1 }
-router.delete('/:id/files', authRequired, async (req, res) => {
-  try {
-    const article = await Article.findByPk(req.params.id)
-    if (!article) return res.status(404).json({ error: 'Article not found' })
-
-    const { fileIds, fileId } = req.body
-    const ids = fileIds || (fileId ? [fileId] : [])
-
-    if (!ids.length) {
-      return res.status(400).json({ error: 'fileIds or fileId required' })
-    }
-
-    // Remove files from article (deletes records from article_files pivot table)
-    await article.removeFiles(ids)
-
-    // Reload with associations
-    await article.reload({ include: [{ model: File, as: 'files' }] })
-    res.json(article)
-  } catch (err) {
-    console.error(err)
-    res.status(400).json({ error: err.message })
-  }
-})
-
-// Set files for article (replaces all): PUT /api/articles/:id/files
-// Body: { fileIds: [1, 2, 3] }
-router.put('/:id/files', authRequired, async (req, res) => {
-  try {
-    const article = await Article.findByPk(req.params.id)
-    if (!article) return res.status(404).json({ error: 'Article not found' })
-
-    const { fileIds } = req.body
-    const ids = fileIds || []
-
-    if (ids.length > 0) {
-      // Verify all files exist
-      const files = await File.findAll({ where: { id: ids } })
-      if (files.length !== ids.length) {
-        return res.status(400).json({ error: 'Some files not found' })
+      if (isImage(f.mimetype)) {
+        const outName = `opt_${path.basename(f.filename, ext)}.webp`
+        const outPath = path.join(UPLOADS_DIR, outName)
+        try {
+          await sharp(originalPath)
+            .resize({ width: 1920, withoutEnlargement: true })
+            .webp({ quality: 75 })
+            .toFile(outPath)
+          // remove original
+          try { fs.unlinkSync(originalPath) } catch (e) { }
+          finalName = outName
+          optimized = true
+        } catch (e) {
+          // keep original
+        }
       }
+
+      const url = fileUrl(req, finalName)
+      const fileRecord = await FileModel.create({
+        filename: finalName,
+        originalname: f.originalname,
+        mime: f.mimetype,
+        size: f.size,
+        url,
+        optimized
+      })
+
+      // associate with article
+      try {
+        await article.addFile(fileRecord)
+      } catch (e) {
+        console.error('associate failed', e.message || e)
+      }
+
+      created.push({ id: fileRecord.id, filename: finalName, url, optimized })
     }
 
-    // Replace all files (removes old associations and creates new ones)
-    await article.setFiles(ids)
-
-    // Reload with associations
-    await article.reload({ include: [{ model: File, as: 'files' }] })
-    res.json(article)
+    const refreshed = await Article.findByPk(req.params.id)
+    res.status(201).json({ files: created, article: refreshed })
   } catch (err) {
     console.error(err)
-    res.status(400).json({ error: err.message })
+    res.status(500).json({ error: err.message })
   }
 })
 

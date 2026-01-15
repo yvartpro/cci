@@ -11,7 +11,8 @@ module.exports = (sequelize) => {
 
     sections: { type: DataTypes.JSON, allowNull: false, defaultValue: [] },
 
-    hero_file_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
+    hero_url: { type: DataTypes.STRING },
+    hero_file_id: { type: DataTypes.INTEGER.UNSIGNED },
 
     // metadata, tags and SEO
     tags: { type: DataTypes.JSON, allowNull: false, defaultValue: [] },
@@ -34,7 +35,6 @@ module.exports = (sequelize) => {
     tableName: 'articles',
     underscored: true,
     timestamps: true,
-    paranoid: true,
   })
 
   return Article
