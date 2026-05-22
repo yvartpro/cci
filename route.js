@@ -5,8 +5,9 @@ import { posts as allPosts } from './data/posts-data.js';
 import { loadPosts, loadComponent, loadCarousel, loadPartners, initCarouselSlider, initMobileMenu } from './component/script.js';
 import { getFiles } from './data/posts-data.js';
 import { partners } from './data/partners-data.js';
+import { API_BASE_URL } from './config.js';
 
-export const API_BASE_URL = 'https://capbio.bi/cci/api';
+export { API_BASE_URL };
 
 export const files = await getFiles();
 const hero_image = files.find(f => f.use_as === 'hero');

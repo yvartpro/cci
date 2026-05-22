@@ -1,11 +1,13 @@
+import { API_BASE_URL } from '../config.js';
+
 const fetchPosts = async () => {
-    const resp = await fetch('https://capbio.bi/cci/api/articles');
+    const resp = await fetch(`${API_BASE_URL}/articles`);
     const data = await resp.json();
     return data;
 }
 
 const fetchPost = async (id) => {
-    const resp = await fetch(`https://capbio.bi/cci/api/articles/${id}`);
+    const resp = await fetch(`${API_BASE_URL}/articles/${id}`);
     const data = await resp.json();
     return data;
 }
@@ -26,7 +28,7 @@ export const getAllPosts = () => {
 };
 
 export const getFiles = async () => {
-    const resp = await fetch('https://capbio.bi/cci/api/files');
+    const resp = await fetch(`${API_BASE_URL}/files`);
     const data = await resp.json();
     return data;
 }

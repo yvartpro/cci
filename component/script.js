@@ -1,4 +1,5 @@
 import { formatDate } from "../utils.js";
+import { API_BASE_URL } from "../config.js";
 
 /**
  * Loads an HTML component into a container
@@ -213,7 +214,7 @@ export const loadCarousel = async (innerSelector, dotsSelector) => {
   }
 
   try {
-    const resp = await fetch('https://capbio.bi/cci/api/carousel');
+    const resp = await fetch(`${API_BASE_URL}/carousel`);
     if (!resp.ok) throw new Error('Failed to fetch carousel data');
     const slidesData = await resp.json();
 
@@ -400,7 +401,7 @@ export const loadComitards = async (selector) => {
   if (!container) return;
 
   try {
-    const resp = await fetch('https://capbio.bi/cci/api/comitard');
+    const resp = await fetch(`${API_BASE_URL}/comitard`);
     if (!resp.ok) throw new Error('Failed to fetch comitards data');
     const data = await resp.json();
 

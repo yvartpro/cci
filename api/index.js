@@ -18,7 +18,8 @@ const UPLOADS_DIR = path.resolve(__dirname, 'uploads')
 /* -------------------- STATIC FILES -------------------- */
 app.use('/cci/uploads', express.static(UPLOADS_DIR))      // old URLs
 
-app.use("/cci", express.static(path.join(__dirname, "public")));
+// Serve the frontend from the repo root (../) on the same port.
+const FRONTEND_DIR = path.resolve(__dirname, '..')
 app.get('/cci/api', (req, res) => {
   res.json({ message: "CCI API running fine" })
 })
@@ -147,6 +148,29 @@ app.post('/cci/api/upload', upload.array('files'), async (req, res) => {
       error: err.message
     })
   }
+})
+
+/* -------------------- FRONTEND -------------------- */
+
+// If an API path isn't matched, stop here so static doesn't leak backend files.
+app.use('/cci/api', (req, res) => {
+  res.status(404).json({ message: 'Not found' })
+})
+
+// Serve the frontend under /cci
+app.use(
+  '/cci',
+  (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ message: 'Not found' })
+    }
+    return next()
+  },
+  express.static(FRONTEND_DIR)
+)
+
+app.get('/', (req, res) => {
+  res.redirect('/cci/')
 })
 
 /* -------------------- START -------------------- */
